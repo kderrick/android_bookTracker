@@ -11,11 +11,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.R;
 
-public class MainActivity extends AppCompatActivity {
-    @Bind(R.id.findBookButton) Button mFindBookButton;
-    @Bind(R.id.bookEditText) EditText mBookEditText;
-
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    @Bind(R.id.findBookButton)
+    Button mFindBookButton;
+    @Bind(R.id.bookEditText)
+    EditText mBookEditText;
 
 
     @Override
@@ -24,19 +24,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mFindBookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String book = mBookEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, BookListActivity.class);
-                intent.putExtra("book", book);
-                startActivity(intent);
-            }
-        });
+        mFindBookButton.setOnClickListener(this);
 
+    }
 
+    @Override
+    public void onClick(View v) {
 
+        if (v == mFindBookButton) {
 
-
+            String book = mBookEditText.getText().toString();
+            Intent intent = new Intent(MainActivity.this, BookListActivity.class);
+            intent.putExtra("book", book);
+            startActivity(intent);
+        }
     }
 }
