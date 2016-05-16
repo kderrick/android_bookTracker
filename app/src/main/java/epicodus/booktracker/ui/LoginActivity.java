@@ -1,4 +1,4 @@
-package epicodus.booktracker;
+package epicodus.booktracker.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import epicodus.booktracker.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

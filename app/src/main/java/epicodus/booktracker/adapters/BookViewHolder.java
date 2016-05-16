@@ -20,8 +20,8 @@ import epicodus.booktracker.ui.SavedBooksActivity;
  * Created by chalmie on 5/16/16.
  */
 public class BookViewHolder extends RecyclerView.ViewHolder {
-    //@Bind(R.id.titleTextView) TextView mTitleTextView;
-    //@Bind(R.id.authorTextView) TextView mAuthorTextView;
+    @Bind(R.id.bookNameTextView) TextView mTitleTextView;
+    @Bind(R.id.authorTextView) TextView mAuthorTextView;
 
 
     private Context mContext;
@@ -45,9 +45,8 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindBook(Book book) {
-
-        //mTitleTextView.setText(book.getTitle());
-        //mAuthorTextView.setText(book.getAuthor());
+        mTitleTextView.setText(book.getTitle());
+        mAuthorTextView.setText(book.getAuthor());
     }
 
 }

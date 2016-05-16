@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -51,9 +52,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
 
     public class BookViewHolder extends RecyclerView.ViewHolder {
         //TODO: change to proper values
-        //@Bind(R.id.titleTextView) TextView mTitleTextView;
+        @Bind(R.id.bookNameTextView) TextView mTitleTextView;
         //@Bind(R.id.bookImageView) ImageView mBookImageView;
-        //@Bind(R.id.authorTextView) TextView mAuthorTextView;
+        @Bind(R.id.authorTextView) TextView mAuthorTextView;
         private Context mContext;
 
         public BookViewHolder(View itemView) {
@@ -77,8 +78,8 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
 
         public void bindBook(Book book) {
             //TODO: change to proper values
-            //mTitleTextView.setText(book.getTitle());
-            //mAuthorTextView.setText(book.getAuthor());
+            mTitleTextView.setText(book.getTitle());
+            mAuthorTextView.setText(book.getAuthor());
             //Picasso.with(mContext).load(book.getImage()).into(mBookImageView);
         }
     }
