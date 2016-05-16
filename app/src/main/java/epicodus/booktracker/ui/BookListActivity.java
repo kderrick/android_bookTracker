@@ -30,7 +30,8 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class BookListActivity extends AppCompatActivity {
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
     public ArrayList<Book> mBooks = new ArrayList<>();
     private BookListAdapter mAdapter;
     //private Firebase mFirebaseRef;

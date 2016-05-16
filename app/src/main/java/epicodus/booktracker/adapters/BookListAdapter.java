@@ -17,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.R;
 import epicodus.booktracker.model.Book;
+import epicodus.booktracker.ui.BookDetailActivity;
 
 /**
  * Created by ali on 5/16/16.
@@ -59,7 +60,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
-
             itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
