@@ -15,7 +15,8 @@ public class Book {
     String retailPrice;
     int pageCount;
     String publishedDate;
-    String pushId;
+    private String pushId;
+    private String index;
 
     //for user to save progress of book variables - no getters or setters yet
     String startDate; //date var
@@ -34,6 +35,7 @@ public class Book {
         this.retailPrice = retailPrice;
         this.pageCount = pageCount;
         this.publishedDate = publishedDate;
+        this.index = "not_specified";
     }
 
     public String getTitle() {
@@ -74,5 +76,13 @@ public class Book {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }
