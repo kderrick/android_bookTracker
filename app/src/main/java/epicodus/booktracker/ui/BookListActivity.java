@@ -33,11 +33,17 @@ public class BookListActivity extends AppCompatActivity {
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     public ArrayList<Book> mBooks = new ArrayList<>();
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mSearchParam;
+
+
+
+
+
     private BookListAdapter mAdapter;
     //private Firebase mFirebaseRef;
 
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,10 @@ public class BookListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         //TODO:Intent is searchParam
+
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mSearchParam = mSharedPreferences.getString(Constants.PREFERENCES_SEARCHPARAM_KEY, null);
+
         String searchParam = intent.getStringExtra("searchParam");
         getBook(searchParam);
     }
@@ -60,6 +70,7 @@ public class BookListActivity extends AppCompatActivity {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
+
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
