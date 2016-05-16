@@ -42,10 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == mFindBookButton) {
             String searchParam = mFindBookEditText.getText().toString();
-            if (!(searchParam).equals("")) {
-                addToSharedPreferences(searchParam);
-            }
+
             Intent intent = new Intent(MainActivity.this, BookListActivity.class);
+            intent.putExtra("searchParam", searchParam);
             startActivity(intent);
 
         }
