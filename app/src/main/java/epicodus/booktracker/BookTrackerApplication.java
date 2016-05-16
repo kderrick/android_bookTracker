@@ -4,9 +4,6 @@ import android.app.Application;
 
 import com.firebase.client.Firebase;
 
-/**
- * Created by kylederrick on 5/16/16.
- */
 public class BookTrackerApplication extends Application {
 
     @Override
