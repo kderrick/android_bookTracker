@@ -1,5 +1,7 @@
 package epicodus.booktracker.model;
 
+import org.parceler.Parcel;
+
 /**
  * Created by ali on 5/16/16.
  */
