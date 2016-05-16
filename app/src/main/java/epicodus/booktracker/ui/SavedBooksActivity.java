@@ -25,8 +25,7 @@ import epicodus.booktracker.adapters.FirebaseBookListAdapter;
 import epicodus.booktracker.model.Book;
 
 public class SavedBooksActivity extends AppCompatActivity {
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private Query mQuery;
     public ArrayList<Book> mBooks = new ArrayList<>();
     private Firebase mSearchedBookRef;
