@@ -1,5 +1,7 @@
 package epicodus.booktracker.model;
 
+import org.parceler.Parcel;
+
 /**
  * Created by ali on 5/16/16.
  */
@@ -8,22 +10,33 @@ public class Book {
     String title;
     String author;
     String image;
-    String pageCount;
+    String description;
+    String mainCategory;
+    double aveRating;
+    double retailPrice;
+    int pageCount;
     String publishedDate;
-    String id;
     String pushId;
+
+    //for user to save progress of book variables - no getters or setters yet
+    String startDate; //date var
+    String endDate;  //date var
+    int currentPage;
+    //avePagesPerDay(); method based on pageCount, currentPage and startDate
 
     public Book() {}
 
-    public Book(String title, String author, String image, String pageCount, String publishedDate, String id) {
+    public Book(String title, String author, String image, String description, String mainCategory, double aveRating, double retailPrice, int pageCount, String publishedDate) {
         this.title = title;
         this.author = author;
         this.image = image;
+        this.description = description;
+        this.mainCategory = mainCategory;
+        this.aveRating = aveRating;
+        this.retailPrice = retailPrice;
         this.pageCount = pageCount;
         this.publishedDate = publishedDate;
-        this.id = id;
     }
-
 
     public String getTitle() {
         return title;
@@ -37,16 +50,28 @@ public class Book {
         return image;
     }
 
-    public String getPageCount() {
+    public String getDescription() {
+        return description;
+    }
+
+    public String getMainCategory() {
+        return mainCategory;
+    }
+
+    public double getAveRating() {
+        return aveRating;
+    }
+
+    public double getRetailPrice() {
+        return retailPrice;
+    }
+
+    public int getPageCount() {
         return pageCount;
     }
 
     public String getPublishedDate() {
         return publishedDate;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getPushId() {
