@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.Constants;
+import epicodus.booktracker.LoginActivity;
 import epicodus.booktracker.R;
 import epicodus.booktracker.adapters.BookListAdapter;
 import epicodus.booktracker.model.Book;
@@ -34,7 +35,7 @@ public class BookListActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     public ArrayList<Book> mBooks = new ArrayList<>();
     private BookListAdapter mAdapter;
-    //private Firebase mFirebaseRef;
+    private Firebase mFirebaseRef;
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -44,7 +45,7 @@ public class BookListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
         ButterKnife.bind(this);
-        //mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
+        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         Intent intent = getIntent();
         //TODO:Intent is searchParam
@@ -56,6 +57,7 @@ public class BookListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         ButterKnife.bind(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -82,11 +84,27 @@ public class BookListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     private void addToSharedPreferences(String searchParam) {
         mEditor.putString(Constants.PREFERENCES_SEARCHPARAM_KEY, searchParam).apply();
+    }
+    protected void logout() {
+        mFirebaseRef.unauth();
+        takeUserToLoginScreenOnUnAuth();
+    }
+
+    private void takeUserToLoginScreenOnUnAuth() {
+        Intent intent = new Intent(BookListActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
 
