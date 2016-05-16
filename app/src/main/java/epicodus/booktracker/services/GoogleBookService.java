@@ -5,7 +5,7 @@ package epicodus.booktracker.services;
  */
 public class GoogleBookService {
 
-    public static void findBooks(String title, Callback callback) {
+//    public static void findBooks(String title, Callback callback) {
 //        String API_KEY = Constants.API_KEY;
 //        OkHttpClient client = new OkHttpClient.Builder().build();
 //        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.BOOK_BASE_URL).newBuilder();
