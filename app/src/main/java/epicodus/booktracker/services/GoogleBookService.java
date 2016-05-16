@@ -29,7 +29,7 @@ public class GoogleBookService {
         OkHttpClient client = new OkHttpClient.Builder().build();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.GOOGLE_API_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter(Constants.GOOGLE_QUERY_PARAMETER, searchParam);
-        urlBuilder.addQueryParameter("searchParam", GOOGLE_API_KEY);
+        urlBuilder.addQueryParameter("key", GOOGLE_API_KEY);
 
         String url = urlBuilder.build().toString();
         Log.v("URL", url);
@@ -45,6 +45,9 @@ public class GoogleBookService {
 
         try {
             String jsonData = response.body().string();
+
+            Log.d("RESPONSE", jsonData+"");
+
             if (response.isSuccessful()) {
                 JSONObject bookJSON = new JSONObject(jsonData);
                 JSONArray resultsJSON = bookJSON.getJSONArray("items");
@@ -52,21 +55,26 @@ public class GoogleBookService {
 
                     JSONObject basicInfoJSON = resultsJSON.getJSONObject(i);
                     JSONObject volumeInfoJSON = basicInfoJSON.getJSONObject("volumeInfo");
-                    JSONObject imagesInfoJSON = volumeInfoJSON.getJSONObject("imageLinks");
-                    JSONArray authorsInfoJSON = volumeInfoJSON.getJSONArray("authors");
+                    //JSONObject imagesInfoJSON = volumeInfoJSON.getJSONObject("imageLinks");
 
+                    JSONArray authorsInfoJSON = new JSONArray();
+
+                    if (!(volumeInfoJSON.getJSONArray("authors").equals(""))) {
+                        authorsInfoJSON = volumeInfoJSON.getJSONArray("authors");
+                    }
 
                     String title = volumeInfoJSON.getString("title");
+
                     String author = authorsInfoJSON.getString(0);
-                    String image = imagesInfoJSON.getString("thumbnail");
-                    String description = basicInfoJSON.getString("description");
-                    String mainCategory = basicInfoJSON.getString("mainCategory");
-                    double aveRating = basicInfoJSON.getDouble("averageRating");
-                    double retailPrice = basicInfoJSON.getJSONObject("retailPrice").getDouble("amount");
+                    //String image = imagesInfoJSON.getString("thumbnail");
+                    String description = volumeInfoJSON.getString("description");
+                    double aveRating = basicInfoJSON.optDouble("averageRating");
+                    double retailPrice = basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").optDouble("amount");
+
                     int pageCount = volumeInfoJSON.getInt("pageCount");
                     String publishedDate = volumeInfoJSON.getString("publishedDate");
 
-                    Book book = new Book(title, author, image, description, mainCategory, aveRating, retailPrice, pageCount, publishedDate);
+                    Book book = new Book(title, author, description, aveRating, retailPrice, pageCount, publishedDate);
                     books.add(book);
                 }
             }

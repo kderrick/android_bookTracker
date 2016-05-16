@@ -11,7 +11,6 @@ public class Book {
     String author;
     String image;
     String description;
-    String mainCategory;
     double aveRating;
     double retailPrice;
     int pageCount;
@@ -26,12 +25,11 @@ public class Book {
 
     public Book() {}
 
-    public Book(String title, String author, String image, String description, String mainCategory, double aveRating, double retailPrice, int pageCount, String publishedDate) {
+    public Book(String title, String author, String description, double aveRating, double retailPrice, int pageCount, String publishedDate) {
         this.title = title;
         this.author = author;
-        this.image = image;
+        // TODO: this.image = image;
         this.description = description;
-        this.mainCategory = mainCategory;
         this.aveRating = aveRating;
         this.retailPrice = retailPrice;
         this.pageCount = pageCount;
@@ -52,10 +50,6 @@ public class Book {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getMainCategory() {
-        return mainCategory;
     }
 
     public double getAveRating() {

@@ -47,7 +47,6 @@ public class BookListActivity extends AppCompatActivity {
         //mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         Intent intent = getIntent();
-
         //TODO:Intent is searchParam
         String searchParam = intent.getStringExtra("searchParam");
         getBook(searchParam);

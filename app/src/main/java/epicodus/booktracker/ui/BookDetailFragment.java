@@ -47,7 +47,7 @@ public class BookDetailFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBook = Parcels.unwrap(getArguments().getParcelable("restaurant"));
+        mBook = Parcels.unwrap(getArguments().getParcelable("book"));
     }
 
     @Override
@@ -58,7 +58,6 @@ public class BookDetailFragment extends Fragment {
         Picasso.with(view.getContext()).load(mBook.getImage()).into(mImageLabel);
         mAuthorLabel.setText(mBook.getAuthor());
         mBookNameLabel.setText(mBook.getTitle());
-        mCategoryLabel.setText(mBook.getMainCategory());
         mDescriptionLabel.setText(mBook.getDescription());
         mPageCountLabel.setText(mBook.getPageCount());
 
