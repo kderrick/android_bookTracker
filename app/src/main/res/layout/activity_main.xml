@@ -3,22 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/books" />
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Search Books"
         android:id="@+id/findBookButton"
+        android:background="@drawable/button_orange"
+        android:textColor="@drawable/button_orange_color"
+        android:textStyle="bold"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -29,6 +24,9 @@
         android:text="Saved Books"
         android:id="@+id/savedBooksButton"
         android:layout_above="@+id/findBookButton"
+        android:background="@drawable/button_tertiary"
+        android:textColor="@drawable/button_tertiary_color"
+        android:textStyle="bold"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
