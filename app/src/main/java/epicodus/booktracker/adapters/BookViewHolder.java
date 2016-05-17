@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import epicodus.booktracker.Constants;
 import epicodus.booktracker.R;
 import epicodus.booktracker.model.Book;
 import epicodus.booktracker.ui.BookDetailActivity;
@@ -26,6 +27,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
 
     private ArrayList<Book> mBooks = new ArrayList<>();
     private Context mContext;
+    private Integer mPosition;
 
     public BookViewHolder(View itemView, ArrayList<Book> books) {
         super(itemView);
@@ -39,8 +41,15 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 int itemPosition = getLayoutPosition();
                 Intent intent = new Intent(mContext, BookDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("books", Parcels.wrap(mBooks));
+                intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);
+                intent.putExtra(Constants.EXTRA_KEY_JOBS, Parcels.wrap(mBooks));
+
+                if (mContext.getClass().getSimpleName().equals(SavedBooksActivity.class.getSimpleName())) {
+                    intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_SAVED);
+                } else {
+                    intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FIND);
+                }
+
                 mContext.startActivity(intent);
             }
         });
