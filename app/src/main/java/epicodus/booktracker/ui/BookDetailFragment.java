@@ -1,6 +1,7 @@
 package epicodus.booktracker.ui;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -37,6 +38,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.descriptionTextView) TextView mDescriptionLabel;
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
+    @Bind(R.id.editBookButton) Button mEditBookButton;
     private SharedPreferences mSharedPreferences;
     private Book mBook;
 
@@ -75,8 +77,11 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
 
         if (mSource.equals(Constants.SOURCE_SAVED)) {
             mSaveBookButton.setVisibility(View.GONE);
+            mEditBookButton.setOnClickListener(this);
+
         } else {
             mSaveBookButton.setOnClickListener(this);
+            mEditBookButton.setVisibility(View.GONE);
         }
 
         Picasso.with(view.getContext()).load(mBook.getImage()).into(mImageLabel);
@@ -98,6 +103,10 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mBook.setPushId(bookPushId);
             pushRef.setValue(mBook);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+        }
+        if (view == mEditBookButton) {
+//            Intent intent = new Intent(BookDetailActivity.class, EditBookActivity.class);
+//            startActivity(intent);
         }
     }
 }
