@@ -37,7 +37,7 @@ public class SavedBooksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_books);
+        setContentView(R.layout.activity_book_list);
         ButterKnife.bind(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SavedBooksActivity.this);

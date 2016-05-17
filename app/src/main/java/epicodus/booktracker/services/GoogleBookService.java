@@ -45,9 +45,6 @@ public class GoogleBookService {
 
         try {
             String jsonData = response.body().string();
-
-            Log.d("RESPONSE", jsonData+"");
-
             if (response.isSuccessful()) {
                 JSONObject bookJSON = new JSONObject(jsonData);
                 JSONArray resultsJSON = bookJSON.getJSONArray("items");
@@ -55,26 +52,22 @@ public class GoogleBookService {
 
                     JSONObject basicInfoJSON = resultsJSON.getJSONObject(i);
                     JSONObject volumeInfoJSON = basicInfoJSON.getJSONObject("volumeInfo");
-                    //JSONObject imagesInfoJSON = volumeInfoJSON.getJSONObject("imageLinks");
-
-                    JSONArray authorsInfoJSON = new JSONArray();
-
-                    if (!(volumeInfoJSON.getJSONArray("authors").equals(""))) {
-                        authorsInfoJSON = volumeInfoJSON.getJSONArray("authors");
-                    }
+                    JSONObject imagesInfoJSON = volumeInfoJSON.optJSONObject("imageLinks");
+                    JSONArray authorsInfoJSON = volumeInfoJSON.getJSONArray("authors");
 
                     String title = volumeInfoJSON.getString("title");
 
                     String author = authorsInfoJSON.getString(0);
-                    //String image = imagesInfoJSON.getString("thumbnail");
+                    String image = imagesInfoJSON.getString("thumbnail");
                     String description = volumeInfoJSON.getString("description");
                     double aveRating = basicInfoJSON.optDouble("averageRating");
-                    double retailPrice = basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").optDouble("amount");
+                    Log.v("TAG", basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").getString("amount")+"");
+                    String retailPrice = basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").getString("amount");
 
                     int pageCount = volumeInfoJSON.getInt("pageCount");
                     String publishedDate = volumeInfoJSON.getString("publishedDate");
 
-                    Book book = new Book(title, author, description, aveRating, retailPrice, pageCount, publishedDate);
+                    Book book = new Book(title, author, image, description, aveRating, retailPrice, pageCount, publishedDate);
                     books.add(book);
                 }
             }

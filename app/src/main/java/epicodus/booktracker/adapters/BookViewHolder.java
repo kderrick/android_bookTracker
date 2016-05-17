@@ -14,8 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.R;
 import epicodus.booktracker.model.Book;
-import epicodus.booktracker.ui.BookDetailActivity;
-
+import epicodus.booktracker.ui.SavedBooksActivity;
 
 /**
  * Created by chalmie on 5/16/16.
@@ -37,7 +36,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 int itemPosition = getLayoutPosition();
-                Intent intent = new Intent(mContext, BookDetailActivity.class);
+                Intent intent = new Intent(mContext, SavedBooksActivity.class);
                 intent.putExtra("position", itemPosition + "");
                 intent.putExtra("books", Parcels.wrap(mBooks));
                 mContext.startActivity(intent);
@@ -46,7 +45,6 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindBook(Book book) {
-
         mTitleTextView.setText(book.getTitle());
         mAuthorTextView.setText(book.getAuthor());
     }
