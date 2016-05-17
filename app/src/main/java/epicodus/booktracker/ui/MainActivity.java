@@ -5,9 +5,19 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -15,42 +25,89 @@ import epicodus.booktracker.Constants;
 import epicodus.booktracker.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.findBookButton) Button mFindBookButton;
-    @Bind(R.id.bookEditText) EditText mFindBookEditText;
+    @Bind(R.id.findBookButton) Button mFindBooksButton;
+    //@Bind(R.id.saveBookButton) Button mSavedBooksButton;
+    //@Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
+
+    private ValueEventListener mUserRefListener;
+    private Firebase mUserRef;
+    private String mUId;
     private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+    private Firebase mFirebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mFindBookButton.setOnClickListener(this);
+
+        //grabs username to show on welcome screen
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
+        mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
+        mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
+
+        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
+
+        mFindBooksButton.setOnClickListener(this);
+        //mSavedBooksButton.setOnClickListener(this);
+
+//       TODO:ADD IN PROJECT - Welcomes user
+//        mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                User user = dataSnapshot.getValue(User.class);
+//                mWelcomeTextView.setText("Welcome, " + user.getName() + ", to");
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                Log.d("TAG", "Read failed");
+//            }
+//        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
-
-
-        String searchParam = mFindBookEditText.getText().toString();
-        Intent intent = new Intent(MainActivity.this, BookListActivity.class);
-        intent.putExtra("searchParam", searchParam);
+    protected void logout() {
+        mFirebaseRef.unauth();
+        takeUserToLoginScreenOnUnAuth();
+    }
+    private void takeUserToLoginScreenOnUnAuth() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
     @Override
     public void onClick(View v) {
-        if (v == mFindBookButton) {
-            String searchParam = mFindBookEditText.getText().toString();
-
-            Intent intent = new Intent(MainActivity.this, BookListActivity.class);
-            intent.putExtra("searchParam", searchParam);
-            startActivity(intent);
-
+        switch (v.getId()) {
+            case R.id.findBookButton:
+                Intent intent = new Intent(MainActivity.this, BookListActivity.class);
+                startActivity(intent);
+                break;
+//            case R.id.saveBookButton:
+//                Intent savedIntent = new Intent(MainActivity.this, SavedBooksActivity.class);
+//                startActivity(savedIntent);
+//                break;
+            default:
+                break;
         }
-    }
-
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.PREFERENCES_SEARCHPARAM_KEY, location).apply();
     }
 }
