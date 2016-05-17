@@ -28,9 +28,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookViewHolder>  {
     private ArrayList<Book> mBooks = new ArrayList<>();
     private Context mContext;
 
-    public BookListAdapter(Context context, ArrayList<Book> restaurants) {
+    public BookListAdapter(Context context, ArrayList<Book> books) {
         mContext = context;
-        mBooks = restaurants;
+        mBooks = books;
     }
 
     @Override

@@ -40,12 +40,14 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mSharedPreferencesEditor = mSharedPreferences.edit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mSharedPreferencesEditor = mSharedPreferences.edit();
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
+
         mCreateUserButton.setOnClickListener(this);
     }
 

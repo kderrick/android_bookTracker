@@ -41,7 +41,7 @@ public class SavedBooksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_list);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SavedBooksActivity.this);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
          mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
          mSearchedBookRef = new Firebase(Constants.FIREBASE_URL + "/users/" + mSharedPreferences.getString("UID", "WRONG") + "/" + Constants.FIREBASE_BOOKS);
         setUpFirebaseQuery();
@@ -70,7 +70,8 @@ public class SavedBooksActivity extends AppCompatActivity {
     }
 
     private void setUpFirebaseQuery() {
-        String book = mSearchedBookRef.toString();
+        String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+        String book = mSearchedBookRef.child(userUid).toString();
         mQuery = new Firebase(book).orderByChild("title");
     }
 

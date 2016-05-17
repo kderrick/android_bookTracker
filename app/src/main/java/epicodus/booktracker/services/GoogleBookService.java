@@ -61,24 +61,27 @@ public class GoogleBookService {
                         author = authorsInfoJSON.getString(0);
                     }
 
-                    String image = imagesInfoJSON.optString("thumbnail");
+                    String image = "";
+                    if (imagesInfoJSON != null) {
+                        image = imagesInfoJSON.getString("thumbnail");
+                    }
 
                     String description = "";
                     if (volumeInfoJSON != null ) {
-                        description = volumeInfoJSON.getString("description");
+                        description = volumeInfoJSON.optString("description");
                     }
 
                     double aveRating = basicInfoJSON.optDouble("averageRating");
 
-                    String retailPrice = "";
-                    if (basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice") != null) {
-                        retailPrice = basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").getString("amount");
-                    }
+//                    String retailPrice = "";
+//                    if (basicInfoJSON.getJSONObject("saleInfo") != null) {
+//                        retailPrice = basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").getString("amount");
+//                    }
 
                     int pageCount = volumeInfoJSON.optInt("pageCount");
                     String publishedDate = volumeInfoJSON.optString("publishedDate");
 
-                    Book book = new Book(title, author, image, description, aveRating, retailPrice, pageCount, publishedDate);
+                    Book book = new Book(title, author, image, description, aveRating, pageCount, publishedDate);
                     books.add(book);
                     Log.v("BOOKS", books.toString());
                 }

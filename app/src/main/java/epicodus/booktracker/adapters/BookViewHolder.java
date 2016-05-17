@@ -24,7 +24,6 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.bookNameTextView) TextView mTitleTextView;
     @Bind(R.id.authorTextView) TextView mAuthorTextView;
 
-
     private ArrayList<Book> mBooks = new ArrayList<>();
     private Context mContext;
 
@@ -41,7 +40,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
                 int itemPosition = getLayoutPosition();
                 Intent intent = new Intent(mContext, BookDetailActivity.class);
                 intent.putExtra("position", itemPosition + "");
-                intent.putExtra("restaurants", Parcels.wrap(mBooks));
+                intent.putExtra("books", Parcels.wrap(mBooks));
                 mContext.startActivity(intent);
             }
         });
