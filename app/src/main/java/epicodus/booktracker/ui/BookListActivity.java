@@ -49,8 +49,6 @@ public class BookListActivity extends AppCompatActivity {
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         Intent intent = getIntent();
-//          mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//          mSearchParam = mSharedPreferences.getString(Constants.PREFERENCES_SEARCHPARAM_KEY, null);
 
         String searchParam = intent.getStringExtra(mSearchParam);
         getBook(searchParam);

@@ -15,24 +15,21 @@
         android:background="@drawable/books" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search"
+        android:text="Search Books"
         android:id="@+id/findBookButton"
-        android:layout_marginTop="65dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bookEditText"
-        android:layout_alignBottom="@+id/findBookButton"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/findBookButton"
-        android:layout_toStartOf="@+id/findBookButton"
-        android:hint="(book title, author, etc)"
-        android:textAlignment="center" />
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Saved Books"
+        android:id="@+id/savedBooksButton"
+        android:layout_above="@+id/findBookButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
 </RelativeLayout>
