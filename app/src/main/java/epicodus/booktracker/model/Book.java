@@ -26,13 +26,13 @@ public class Book {
 
     public Book() {}
 
-    public Book(String title, String author, String image, String description, double aveRating, String retailPrice, int pageCount, String publishedDate) {
+    public Book(String title, String author, String image, String description, double aveRating, int pageCount, String publishedDate) {
         this.title = title;
         this.author = author;
         this.image = image;
         this.description = description;
         this.aveRating = aveRating;
-        this.retailPrice = retailPrice;
+        //this.retailPrice = retailPrice;
         this.pageCount = pageCount;
         this.publishedDate = publishedDate;
         this.index = "not_specified";
