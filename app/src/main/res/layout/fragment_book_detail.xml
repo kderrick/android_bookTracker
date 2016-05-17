@@ -63,18 +63,18 @@
                 android:layout_above="@+id/saveBookButton"
                 android:paddingLeft="30dp"
                 android:paddingTop="20dp"
-                android:paddingRight="30dp">
+                android:paddingRight="30dp"
+                android:weightSum="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description"
-                    android:id="@+id/descriptionTextView"
+                    android:text="published date"
                     android:drawablePadding="4dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center" />
+                    android:gravity="center_vertical"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -98,15 +98,23 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ScrollView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="published date"
-                    android:drawablePadding="4dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_vertical"/>
+                    android:id="@+id/scrollView"
+                    android:layout_weight="0.26">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:id="@+id/descriptionTextView"
+                        android:drawablePadding="4dp"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center" />
+                </ScrollView>
 
             </LinearLayout>
 
