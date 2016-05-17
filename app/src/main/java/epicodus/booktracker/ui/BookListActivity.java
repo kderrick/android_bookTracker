@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,8 +31,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class BookListActivity extends AppCompatActivity {
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     public ArrayList<Book> mBooks = new ArrayList<>();
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -49,12 +49,10 @@ public class BookListActivity extends AppCompatActivity {
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         Intent intent = getIntent();
-        //TODO:Intent is searchParam
+//          mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//          mSearchParam = mSharedPreferences.getString(Constants.PREFERENCES_SEARCHPARAM_KEY, null);
 
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mSearchParam = mSharedPreferences.getString(Constants.PREFERENCES_SEARCHPARAM_KEY, null);
-
-        String searchParam = intent.getStringExtra("searchParam");
+        String searchParam = intent.getStringExtra(mSearchParam);
         getBook(searchParam);
     }
 
@@ -101,6 +99,7 @@ public class BookListActivity extends AppCompatActivity {
     private void addToSharedPreferences(String searchParam) {
         mEditor.putString(Constants.PREFERENCES_SEARCHPARAM_KEY, searchParam).apply();
     }
+
     protected void logout() {
         mFirebaseRef.unauth();
         takeUserToLoginScreenOnUnAuth();
@@ -125,6 +124,7 @@ public class BookListActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) {
+                Log.d("RESPONSE", response+"");
                 mBooks = googleBookService.processResults(response);
                 BookListActivity.this.runOnUiThread(new Runnable() {
                     @Override

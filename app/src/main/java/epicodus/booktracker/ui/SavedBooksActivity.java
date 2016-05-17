@@ -33,6 +33,7 @@ public class SavedBooksActivity extends AppCompatActivity {
     private FirebaseBookListAdapter mAdapter;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
+    private Firebase mFirebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,8 @@ public class SavedBooksActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(SavedBooksActivity.this);
-//         FIREBASE STUFF
-//         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-//         mSearchedBookRef = new Firebase(Constants.FIREBASE_URL + "/users/" + mSharedPreferences.getString("UID", "WRONG") + "/" + Constants.FIREBASE_BOOKS);
+         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
+         mSearchedBookRef = new Firebase(Constants.FIREBASE_URL + "/users/" + mSharedPreferences.getString("UID", "WRONG") + "/" + Constants.FIREBASE_BOOKS);
         setUpFirebaseQuery();
         setUpRecyclerView();
 

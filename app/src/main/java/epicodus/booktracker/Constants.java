@@ -17,4 +17,6 @@ public class Constants {
     public static final String GOOGLE_API_BASE_URL = "https://www.googleapis.com/books/v1/volumes";
     public static final String GOOGLE_QUERY_PARAMETER = "q";
     public static final String PREFERENCES_SEARCHPARAM_KEY = "searchParam";
+
+    public static final String FIREBASE_BOOKS = "books";
 }
