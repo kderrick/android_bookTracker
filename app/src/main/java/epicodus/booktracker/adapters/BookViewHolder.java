@@ -40,7 +40,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
                 int itemPosition = getLayoutPosition();
                 Intent intent = new Intent(mContext, BookDetailActivity.class);
                 intent.putExtra("position", itemPosition + "");
-                intent.putExtra("restaurants", Parcels.wrap(mBooks));
+                intent.putExtra("books", Parcels.wrap(mBooks));
                 mContext.startActivity(intent);
             }
         });
