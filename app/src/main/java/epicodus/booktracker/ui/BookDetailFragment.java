@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.Constants;
@@ -36,25 +38,33 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
     private SharedPreferences mSharedPreferences;
-
     private Book mBook;
 
+    private ArrayList<Book> mBooks;
+    private Integer mPosition;
+    private String mSource;
 
-
-    public static BookDetailFragment newInstance(Book book) {
+    public static BookDetailFragment newInstance(ArrayList<Book> books, Integer position, String source) {
         BookDetailFragment bookDetailFragment = new BookDetailFragment();
+
         Bundle args = new Bundle();
-        args.putParcelable("book", Parcels.wrap(book));
+        args.putParcelable(Constants.EXTRA_KEY_JOBS, Parcels.wrap(books));
+        args.putInt(Constants.EXTRA_KEY_POSITION, position);
+        args.putString(Constants.KEY_SOURCE, source);
         bookDetailFragment.setArguments(args);
         return bookDetailFragment;
     }
 
     @Override
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBook = Parcels.unwrap(getArguments().getParcelable("book"));
+        mBooks = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_JOBS));
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
+        mBook = mBooks.get(mPosition);
+
+        mSource = getArguments().getString(Constants.KEY_SOURCE);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -62,6 +72,12 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_book_detail, container, false);
         ButterKnife.bind(this, view);
         mSaveBookButton.setOnClickListener(this);
+
+        if (mSource.equals(Constants.SOURCE_SAVED)) {
+            mSaveBookButton.setVisibility(View.GONE);
+        } else {
+            mSaveBookButton.setOnClickListener(this);
+        }
 
         Picasso.with(view.getContext()).load(mBook.getImage()).into(mImageLabel);
         mAuthorLabel.setText(mBook.getAuthor());

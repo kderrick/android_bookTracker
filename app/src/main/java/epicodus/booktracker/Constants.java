@@ -21,5 +21,11 @@ public class Constants {
     public static final String GOOGLE_QUERY_PARAMETER = "q";
     public static final String PREFERENCES_SEARCHPARAM_KEY = "searchParam";
 
-    public static final String FIREBASE_BOOKS = "books";
+    public static final String KEY_SOURCE = "source";
+    public static final String SOURCE_SAVED = "saved";
+    public static final String SOURCE_FIND = "find";
+
+
+    public static final String EXTRA_KEY_POSITION = "position";
+    public static final String EXTRA_KEY_JOBS = "books";
 }
