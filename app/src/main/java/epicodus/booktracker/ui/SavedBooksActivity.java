@@ -25,15 +25,12 @@ import epicodus.booktracker.adapters.FirebaseBookListAdapter;
 import epicodus.booktracker.model.Book;
 
 public class SavedBooksActivity extends AppCompatActivity {
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private Query mQuery;
-    public ArrayList<Book> mBooks = new ArrayList<>();
-    private Firebase mSearchedBookRef;
-    private ValueEventListener mSearchedBookRefListener;
+    private Firebase mFirebaseRef;
     private FirebaseBookListAdapter mAdapter;
     private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private Firebase mFirebaseRef;
+
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,36 +39,15 @@ public class SavedBooksActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-         mSearchedBookRef = new Firebase(Constants.FIREBASE_URL + "/users/" + mSharedPreferences.getString("UID", "WRONG") + "/" + Constants.FIREBASE_BOOKS);
+        mFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS);
+
         setUpFirebaseQuery();
         setUpRecyclerView();
-
-        mSearchedBookRefListener = mSearchedBookRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() != null) {
-                    String books = dataSnapshot.getValue().toString();
-                    Log.d("Books updated", books);
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        mSearchedBookRef.removeEventListener(mSearchedBookRefListener);
     }
 
     private void setUpFirebaseQuery() {
         String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
-        String book = mSearchedBookRef.child(userUid).toString();
+        String book = mFirebaseRef.child(userUid).toString();
         mQuery = new Firebase(book).orderByChild("title");
     }
 
@@ -80,5 +56,16 @@ public class SavedBooksActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
     }
-
+    @Override
+    public void onPause() {
+        String uid = mSharedPreferences.getString(Constants.KEY_UID, null);
+        super.onPause();
+        for (Book book : mAdapter.getItems()) {
+            String pushID = book.getPushId();
+            book.setIndex(Integer.toString(mAdapter.getItems().indexOf(book)));
+            mFirebaseRef.child(uid)
+                    .child(pushID)
+                    .setValue(book);
+        }
+    }
 }

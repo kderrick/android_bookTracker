@@ -26,7 +26,7 @@ import epicodus.booktracker.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.findBookButton) Button mFindBooksButton;
-    //@Bind(R.id.saveBookButton) Button mSavedBooksButton;
+    @Bind(R.id.savedBooksButton) Button mSavedBooksButton;
     //@Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
 
     private ValueEventListener mUserRefListener;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         mFindBooksButton.setOnClickListener(this);
-        //mSavedBooksButton.setOnClickListener(this);
+        mSavedBooksButton.setOnClickListener(this);
 
 //       TODO:ADD IN PROJECT - Welcomes user
 //        mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
@@ -102,10 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, BookListActivity.class);
                 startActivity(intent);
                 break;
-//            case R.id.saveBookButton:
-//                Intent savedIntent = new Intent(MainActivity.this, SavedBooksActivity.class);
-//                startActivity(savedIntent);
-//                break;
+            case R.id.savedBooksButton:
+                Intent savedIntent = new Intent(MainActivity.this, SavedBooksActivity.class);
+                startActivity(savedIntent);
+                break;
             default:
                 break;
         }
