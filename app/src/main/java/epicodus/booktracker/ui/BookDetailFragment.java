@@ -1,7 +1,9 @@
 package epicodus.booktracker.ui;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.descriptionTextView) TextView mDescriptionLabel;
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
+    private SharedPreferences mSharedPreferences;
 
     private Book mBook;
 
@@ -51,6 +54,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBook = Parcels.unwrap(getArguments().getParcelable("book"));
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
     @Override
@@ -71,8 +75,12 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if (view == mSaveBookButton) {
-            Firebase ref = new Firebase(Constants.FIREBASE_URL_BOOKS);
-            ref.push().setValue(mBook);
+            String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+            Firebase userBooksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid);
+            Firebase pushRef = userBooksFirebaseRef.push();
+            String bookPushId = pushRef.getKey();
+            mBook.setPushId(bookPushId);
+            pushRef.setValue(mBook);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
