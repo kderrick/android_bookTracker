@@ -62,9 +62,12 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Log in"
-            android:background="@color/colorAccent"
+            android:background="@drawable/login_button"
+            android:textColor="@drawable/login_button_color"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_marginTop="15dp"
-            android:textColor="@color/colorPrimaryDark" />
+            />
 
         <TextView
             android:layout_width="wrap_content"
