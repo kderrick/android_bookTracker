@@ -49,12 +49,18 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         mCreateUserButton.setOnClickListener(this);
+        mLoginTextView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (view == mCreateUserButton) {
             createNewUser();
+        }
+        if (view == mLoginTextView) {
+            Intent loginIntent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
         }
     }
 
