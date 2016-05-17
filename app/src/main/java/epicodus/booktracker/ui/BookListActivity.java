@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.Constants;
-import epicodus.booktracker.LoginActivity;
 import epicodus.booktracker.R;
 import epicodus.booktracker.adapters.BookListAdapter;
 import epicodus.booktracker.model.Book;
@@ -37,10 +36,6 @@ public class BookListActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mSearchParam;
-
-
-
-
 
     private BookListAdapter mAdapter;
     private Firebase mFirebaseRef;

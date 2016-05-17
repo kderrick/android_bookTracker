@@ -19,9 +19,7 @@ import com.firebase.client.FirebaseError;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.Constants;
-import epicodus.booktracker.ui.CreateAccountActivity;
 import epicodus.booktracker.R;
-import epicodus.booktracker.ui.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
