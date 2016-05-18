@@ -40,7 +40,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
 
             @Override
             public void onClick(View v) {
-                int itemPosition = getLayoutPosition();
+                int mPosition = getLayoutPosition();
                 Intent intent = new Intent(mContext, BookDetailActivity.class);
                 intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);
                 intent.putExtra(Constants.EXTRA_KEY_JOBS, Parcels.wrap(mBooks));
