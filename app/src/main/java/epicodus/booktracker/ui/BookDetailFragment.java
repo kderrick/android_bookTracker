@@ -36,7 +36,6 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.bookImageView) ImageView mImageLabel;
     @Bind(R.id.authorTextView) TextView mAuthorLabel;
     @Bind(R.id.bookNameTextView) TextView mBookNameLabel;
-    @Bind(R.id.categoryTextView) TextView mCategoryLabel;
     @Bind(R.id.descriptionTextView) TextView mDescriptionLabel;
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
