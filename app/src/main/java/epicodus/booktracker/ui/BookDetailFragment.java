@@ -109,9 +109,10 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             final String imageUrl = mBook.getImage();
 
         if (TextUtils.isEmpty(imageUrl)) {
-                           mImageLabel.setImageResource(R.drawable.noimage);
+            Picasso.with(view.getContext()).load(R.drawable.noimage).resize(400, 600).into(mImageLabel);
+//                           mImageLabel.setImageResource(R.drawable.noimage);
         } else {
-            Picasso.with(view.getContext()).load(mBook.getImage()).into(mImageLabel);
+            Picasso.with(view.getContext()).load(mBook.getImage()).resize(400, 600).into(mImageLabel);
 
         }
         mAuthorLabel.setText(mBook.getAuthor());
