@@ -40,4 +40,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name of App!"
+        android:id="@+id/appNameTextView"
+        android:layout_below="@+id/welcomeTextView"
+        android:layout_centerHorizontal="true"
+        android:textSize="50dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="47dp" />
+
 </RelativeLayout>
