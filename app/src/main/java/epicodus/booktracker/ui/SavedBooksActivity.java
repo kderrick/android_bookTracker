@@ -23,12 +23,15 @@ import epicodus.booktracker.Constants;
 import epicodus.booktracker.R;
 import epicodus.booktracker.adapters.FirebaseBookListAdapter;
 import epicodus.booktracker.model.Book;
+import epicodus.booktracker.util.OnStartDragListener;
+import epicodus.booktracker.util.SimpleItemTouchHelperCallback;
 
-public class SavedBooksActivity extends AppCompatActivity {
+public class SavedBooksActivity extends AppCompatActivity implements OnStartDragListener {
     private Query mQuery;
     private Firebase mFirebaseRef;
     private FirebaseBookListAdapter mAdapter;
     private SharedPreferences mSharedPreferences;
+    private ItemTouchHelper mItemTouchHelper;
 
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
@@ -52,10 +55,19 @@ public class SavedBooksActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        mAdapter = new FirebaseBookListAdapter(mQuery, Book.class);
+        mAdapter = new FirebaseBookListAdapter(mQuery, Book.class, this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
+
     @Override
     public void onPause() {
         String uid = mSharedPreferences.getString(Constants.KEY_UID, null);

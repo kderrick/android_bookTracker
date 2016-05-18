@@ -15,32 +15,61 @@ import com.firebase.client.Query;
 
 import java.util.Collections;
 
+import epicodus.booktracker.Constants;
 import epicodus.booktracker.R;
 import epicodus.booktracker.model.Book;
 import epicodus.booktracker.util.FirebaseRecyclerAdapter;
+import epicodus.booktracker.util.ItemTouchHelperAdapter;
+import epicodus.booktracker.util.OnStartDragListener;
 
 /**
  * Created by chalmie on 5/16/16.
  */
-public class FirebaseBookListAdapter extends FirebaseRecyclerAdapter<BookViewHolder, Book> {
+public class FirebaseBookListAdapter extends FirebaseRecyclerAdapter<BookViewHolder, Book> implements ItemTouchHelperAdapter {
 
     private Context mContext;
+    private final OnStartDragListener mDragStartListener;
 
-    public FirebaseBookListAdapter(Query query, Class<Book> itemClass) {
+    public FirebaseBookListAdapter(Query query, Class<Book> itemClass, OnStartDragListener dragStartListener) {
         super(query, itemClass);
+        mDragStartListener = dragStartListener;
     }
 
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         View view = LayoutInflater.from(mContext)
-                .inflate(R.layout.book_list_item, parent, false);
+                .inflate(R.layout.book_list_item_drag, parent, false);
         return new BookViewHolder(view, getItems());
     }
 
     @Override
     public void onBindViewHolder(final BookViewHolder holder, int position) {
         holder.bindBook(getItem(position));
+        holder.mTitleTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                    mDragStartListener.onStartDrag(holder);
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        return true;
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String uid = sharedPreferences.getString(Constants.KEY_UID, null);
+        Firebase ref = new Firebase(Constants.FIREBASE_URL_BOOKS).child(uid);
+        String bookKey = getItem(position).getPushId();
+        ref.child(bookKey).removeValue();
     }
 
     @Override
