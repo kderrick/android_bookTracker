@@ -10,20 +10,15 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
 
-        <ImageView
-            android:layout_width="274dp"
-            android:layout_height="128dp"
-            android:id="@+id/bookImageView"
-            android:scaleType="centerCrop" />
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:paddingTop="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="20dp">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,11 +27,9 @@
                 android:id="@+id/bookNameTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
-
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,42 +37,37 @@
                 android:text="Author"
                 android:id="@+id/authorTextView"
                 android:layout_below="@+id/bookNameTextView"
+                android:textSize="15sp"
+                android:textColor="@color/colorPrimary"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textStyle="italic" />
 
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="38dp"
-                android:text="avgPagesPerDay"
-                android:id="@+id/avgPageTextView"
-                android:layout_gravity="right"
-                android:layout_alignBottom="@+id/currentPageTextView"
-                android:textSize="20sp"
-                android:layout_alignTop="@+id/currentPageTextView"
-                android:layout_toLeftOf="@+id/currentPageTextView"
-                android:layout_toStartOf="@+id/currentPageTextView"/>
-
-            <TextView
-                android:id="@+id/currentPageTextView"
-                android:layout_width="99dp"
-                android:layout_height="45dp"
-                android:text="currentPage"
-                android:textSize="20sp"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bookImageView"
+                android:layout_alignBottom="@+id/authorTextView"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_alignParentEnd="true" />
 
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/readingProgressRelativeLayout">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="startDate"
                 android:id="@+id/startDateTextView"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/authorTextView"
-                android:layout_toEndOf="@+id/authorTextView"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,8 +77,27 @@
                 android:layout_alignTop="@+id/startDateTextView"
                 android:layout_toRightOf="@+id/avgPageTextView"
                 android:layout_toEndOf="@+id/avgPageTextView"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="avgPagesPerDay"
+                android:id="@+id/avgPageTextView"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/currentPageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="currentPage"
+                android:textSize="20sp"
+                android:layout_alignTop="@+id/avgPageTextView"
+                android:layout_toRightOf="@+id/endDateTextView"
+                android:layout_toEndOf="@+id/endDateTextView" />
         </RelativeLayout>
 
         <RelativeLayout

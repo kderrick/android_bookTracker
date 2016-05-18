@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
     @Bind(R.id.editBookButton) Button mEditBookButton;
+    @Bind(R.id.readingProgressRelativeLayout) RelativeLayout mReadingProgressRelativeLayout;
 
     @Bind(R.id.currentPageTextView) TextView mCurrentPageTextView;
     @Bind(R.id.avgPageTextView) TextView mAvgPageTextView;
@@ -91,6 +93,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
 
         } else {
             mSaveBookButton.setOnClickListener(this);
+            mReadingProgressRelativeLayout.setVisibility(View.GONE);
             mEditBookButton.setVisibility(View.GONE);
             mCurrentPageTextView.setVisibility(View.GONE);
             mAvgPageTextView.setVisibility(View.GONE);
