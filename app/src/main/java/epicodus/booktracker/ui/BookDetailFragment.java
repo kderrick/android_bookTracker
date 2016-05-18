@@ -95,6 +95,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mDescriptionLabel.setVisibility(View.GONE);
             mEditBookButton.setOnClickListener(this);
             mAvgPageTextView.setText(getAvgPagesPerDay());
+            mCurrentPageTextView.setText(mBook.getCurrentPage()+"");
 
         } else {
             mSaveBookButton.setOnClickListener(this);
@@ -158,9 +159,8 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 String currentPage = currentPageEditText.getText().toString();
                 int currentPageInt = Integer.parseInt(currentPage);
                 mBook.setCurrentPage(currentPageInt);
-                //currentPageEditText.getText().toString()
-                String currentPageString = String.valueOf(mBook.getCurrentPage());
-                mCurrentPageTextView.setText(currentPageString);
+                //String currentPageString = currentPageEditText.getText().toString();
+                mCurrentPageTextView.setText(mBook.getCurrentPage()+"");
 
                 Map<String, Object> bookMap = new HashMap<String, Object>();
                 bookMap.put("currentPage", currentPage);
