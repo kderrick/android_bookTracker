@@ -3,9 +3,14 @@ package epicodus.booktracker.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +43,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        Spannable spannable = (Spannable)mRegisterTextView.getText();
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources()
+                .getColor(R.color.colorOrange));
+        spannable.setSpan( colorSpan, 31, 35, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
         mRegisterTextView.setOnClickListener(this);
         mPasswordLoginButton.setOnClickListener(this);
 
