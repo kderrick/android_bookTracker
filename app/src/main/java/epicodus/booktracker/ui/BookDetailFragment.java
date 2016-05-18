@@ -1,7 +1,7 @@
 package epicodus.booktracker.ui;
 
 
-import android.content.Intent;
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,7 +9,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,20 +36,21 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.bookImageView) ImageView mImageLabel;
     @Bind(R.id.authorTextView) TextView mAuthorLabel;
     @Bind(R.id.bookNameTextView) TextView mBookNameLabel;
-//    @Bind(R.id.categoryTextView) TextView mCategoryLabel;
+    @Bind(R.id.categoryTextView) TextView mCategoryLabel;
     @Bind(R.id.descriptionTextView) TextView mDescriptionLabel;
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
     @Bind(R.id.editBookButton) Button mEditBookButton;
-    @Bind(R.id. publishDateTextView) TextView mPublishDateLabel;
-//    @Bind(R.id. currentPageTextView) TextView mCurrentPageTextView;
-    private SharedPreferences mSharedPreferences;
 
+    @Bind(R.id.currentPageTextView) TextView mCurrentPageTextView;
+
+    private SharedPreferences mSharedPreferences;
     private Book mBook;
 
     private ArrayList<Book> mBooks;
     private Integer mPosition;
     private String mSource;
+
 
     public static BookDetailFragment newInstance(ArrayList<Book> books, Integer position, String source) {
         BookDetailFragment bookDetailFragment = new BookDetailFragment();
@@ -80,10 +83,9 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
 
         if (mSource.equals(Constants.SOURCE_SAVED)) {
             mSaveBookButton.setVisibility(View.GONE);
-            mEditBookButton.setOnClickListener(this);
             mDescriptionLabel.setVisibility(View.GONE);
-            mPublishDateLabel.setVisibility(View.GONE);
-
+            mEditBookButton.setOnClickListener(this);
+            //might not be right
 
         } else {
             mSaveBookButton.setOnClickListener(this);
@@ -95,8 +97,6 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         mBookNameLabel.setText(mBook.getTitle());
         mDescriptionLabel.setText(mBook.getDescription());
         //mPageCountLabel.setText(mBook.getPageCount());
-        mPublishDateLabel.setText("Date published: " + mBook.getPublishedDate());
-        mPageCountLabel.setText("Pages: " + Integer.toString(mBook.getPageCount()));
 
         return view;
     }
@@ -113,9 +113,26 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
         if (view == mEditBookButton) {
-//            Intent intent = new Intent(BookDetailActivity.class, EditBookActivity.class);
-//            startActivity(intent);
+            showEditBookDialog();
         }
+    }
+
+    protected void showEditBookDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.customdialog);
+
+        final EditText currentPageEditText = (EditText)dialog.findViewById(R.id.currentPageEditText);
+        Button confirmEditBookButton = (Button)dialog.findViewById(R.id.confirmEditBookButton);
+
+        confirmEditBookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentPageTextView.setText(currentPageEditText.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
 
