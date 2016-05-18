@@ -8,16 +8,22 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="274dp"
+            android:layout_height="128dp"
+            android:id="@+id/bookImageView"
+            android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:background="@android:color/white"
-            android:paddingTop="30dp"
+            android:paddingTop="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="30dp">
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -26,9 +32,11 @@
                 android:id="@+id/bookNameTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,31 +44,54 @@
                 android:text="Author"
                 android:id="@+id/authorTextView"
                 android:layout_below="@+id/bookNameTextView"
-                android:textSize="15sp"
-                android:textColor="@color/colorPrimary"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textStyle="italic" />
 
-            <ImageView
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="38dp"
+                android:text="avgPagesPerDay"
+                android:id="@+id/avgPageTextView"
+                android:layout_gravity="right"
+                android:layout_alignBottom="@+id/currentPageTextView"
+                android:textSize="20sp"
+                android:layout_alignTop="@+id/currentPageTextView"
+                android:layout_toLeftOf="@+id/currentPageTextView"
+                android:layout_toStartOf="@+id/currentPageTextView"/>
+
+            <TextView
+                android:id="@+id/currentPageTextView"
+                android:layout_width="99dp"
+                android:layout_height="45dp"
+                android:text="currentPage"
+                android:textSize="20sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/bookImageView"
-                android:layout_alignBottom="@+id/authorTextView"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
+                android:text="startDate"
+                android:id="@+id/startDateTextView"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/authorTextView"
+                android:layout_toEndOf="@+id/authorTextView"
+                android:textSize="20sp"/>
 
-        <TextView
-            android:id="@+id/currentPageTextView"
-            android:layout_width="99dp"
-            android:layout_height="45dp"
-            android:text="219"
-            android:textSize="25sp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="endDate"
+                android:id="@+id/endDateTextView"
+                android:layout_alignTop="@+id/startDateTextView"
+                android:layout_toRightOf="@+id/avgPageTextView"
+                android:layout_toEndOf="@+id/avgPageTextView"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,9 +113,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="current page "
+                    android:text="published date"
                     android:drawablePadding="4dp"
-                    android:id="@+id/currentPageTextView"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
@@ -93,14 +123,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="published date"
-                    android:id="@+id/publishDateTextView"
+                    android:text="Category"
+                    android:id="@+id/categoryTextView"
                     android:drawablePadding="4dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center_vertical"/>
-
+                    android:gravity="center"/>
 
                 <TextView
                 android:layout_width="wrap_content"
@@ -112,8 +141,6 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"/>
-
-
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -127,7 +154,7 @@
                         android:text="Description"
                         android:id="@+id/descriptionTextView"
                         android:drawablePadding="4dp"
-                        android:textSize="12sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="10dp"
                         android:gravity="center" />
@@ -154,5 +181,6 @@
                 android:textSize="15sp" />
 
         </RelativeLayout>
+
     </LinearLayout>
 </FrameLayout>

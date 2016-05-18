@@ -2,6 +2,8 @@ package epicodus.booktracker.model;
 
 import org.parceler.Parcel;
 
+import java.util.Date;
+
 /**
  * Created by ali on 5/16/16.
  */
@@ -19,8 +21,8 @@ public class Book {
     private String index;
 
     //for user to save progress of book variables - no getters or setters yet
-    String startDate; //date var
-    String endDate;  //date var
+    Date startDate; //date var
+    Date endDate;  //date var
     int currentPage;
     //avePagesPerDay(); method based on pageCount, currentPage and startDate
 
@@ -85,4 +87,24 @@ public class Book {
     public void setIndex(String index) {
         this.index = index;
     }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+//    public int getAvgPagesPerDay(int currentPage) {
+//        this.currentPage
+//    }
 }
