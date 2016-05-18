@@ -42,6 +42,8 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.bookImageView) ImageView mImageLabel;
     @Bind(R.id.authorTextView) TextView mAuthorLabel;
     @Bind(R.id.bookNameTextView) TextView mBookNameLabel;
+    @Bind(R.id.categoryTextView) TextView mCategoryTextView;
+    @Bind(R.id.publishedDateTextView) TextView mPublishedDateTextView;
     @Bind(R.id.descriptionTextView) TextView mDescriptionLabel;
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
@@ -92,6 +94,9 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
 
         if (mSource.equals(Constants.SOURCE_SAVED)) {
             mSaveBookButton.setVisibility(View.GONE);
+            mPageCountLabel.setVisibility(View.GONE);
+            mPublishedDateTextView.setVisibility(View.GONE);
+            mCategoryTextView.setVisibility(View.GONE);
             mDescriptionLabel.setVisibility(View.GONE);
             mEditBookButton.setOnClickListener(this);
             //might not be right
