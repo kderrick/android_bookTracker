@@ -8,22 +8,16 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
-
-        <ImageView
-            android:layout_width="274dp"
-            android:layout_height="128dp"
-            android:id="@+id/bookImageView"
-            android:scaleType="centerCrop" />
+        android:background="@color/colorPrimaryDark">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:paddingTop="20dp"
+            android:paddingTop="30dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="30dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,11 +26,9 @@
                 android:id="@+id/bookNameTextView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
-
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,9 +36,19 @@
                 android:text="Author"
                 android:id="@+id/authorTextView"
                 android:layout_below="@+id/bookNameTextView"
+                android:textSize="15sp"
+                android:textColor="@color/colorPrimary"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textStyle="italic" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bookImageView"
+                android:layout_alignBottom="@+id/authorTextView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
         <RelativeLayout
