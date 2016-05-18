@@ -69,8 +69,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="published date"
+                    android:text="current page "
                     android:drawablePadding="4dp"
+                    android:id="@+id/currentPageTextView"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
@@ -79,13 +80,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Category"
-                    android:id="@+id/categoryTextView"
+                    android:text="published date"
+                    android:id="@+id/publishDateTextView"
                     android:drawablePadding="4dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center"/>
+                    android:gravity="center_vertical"/>
+
 
                 <TextView
                 android:layout_width="wrap_content"
@@ -97,6 +99,8 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"/>
+
+
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -110,7 +114,7 @@
                         android:text="Description"
                         android:id="@+id/descriptionTextView"
                         android:drawablePadding="4dp"
-                        android:textSize="15sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="10dp"
                         android:gravity="center" />
