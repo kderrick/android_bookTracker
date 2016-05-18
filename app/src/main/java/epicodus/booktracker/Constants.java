@@ -12,6 +12,9 @@ public class Constants {
     public static final String FIREBASE_LOCATION_BOOKS = "books";
     public static final String FIREBASE_URL_BOOKS = FIREBASE_URL + "/" + FIREBASE_LOCATION_BOOKS;
 
+    //newly added 2pm Wed May 18
+    public static final String KEY_BOOKID = "BOOKID";
+
     public static final String FIREBASE_LOCATION_USERS = "users";
     public static final String KEY_USER_EMAIL = "email";
     public static final String KEY_UID = "UID";
@@ -27,5 +30,5 @@ public class Constants {
 
 
     public static final String EXTRA_KEY_POSITION = "position";
-    public static final String EXTRA_KEY_JOBS = "books";
+    public static final String EXTRA_KEY_BOOKS = "books";
 }

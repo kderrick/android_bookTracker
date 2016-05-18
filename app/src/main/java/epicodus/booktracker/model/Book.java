@@ -14,17 +14,14 @@ public class Book {
     String image;
     String description;
     double aveRating;
-    String retailPrice;
     int pageCount;
     String publishedDate;
     private String pushId;
     private String index;
 
-    //for user to save progress of book variables - no getters or setters yet
-    Date startDate; //date var
-    Date endDate;  //date var
+    Date startDate;
+    Date endDate;
     int currentPage;
-    //avePagesPerDay(); method based on pageCount, currentPage and startDate
 
     public Book() {}
 
@@ -34,10 +31,10 @@ public class Book {
         this.image = image;
         this.description = description;
         this.aveRating = aveRating;
-        //this.retailPrice = retailPrice;
         this.pageCount = pageCount;
         this.publishedDate = publishedDate;
         this.index = "not_specified";
+        this.currentPage = 0;
     }
 
     public String getTitle() {
@@ -58,10 +55,6 @@ public class Book {
 
     public double getAveRating() {
         return aveRating;
-    }
-
-    public String getRetailPrice() {
-        return retailPrice;
     }
 
     public int getPageCount() {
@@ -104,7 +97,11 @@ public class Book {
         this.endDate = endDate;
     }
 
-//    public int getAvgPagesPerDay(int currentPage) {
-//        this.currentPage
-//    }
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
 }
