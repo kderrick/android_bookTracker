@@ -23,11 +23,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.Constants;
 import epicodus.booktracker.R;
+import epicodus.booktracker.model.User;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.findBookButton) Button mFindBooksButton;
     @Bind(R.id.savedBooksButton) Button mSavedBooksButton;
-    //@Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
+    @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
 
     private ValueEventListener mUserRefListener;
     private Firebase mUserRef;
@@ -52,18 +53,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSavedBooksButton.setOnClickListener(this);
 
 //       TODO:ADD IN PROJECT - Welcomes user
-//        mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                User user = dataSnapshot.getValue(User.class);
-//                mWelcomeTextView.setText("Welcome, " + user.getName() + ", to");
-//            }
-//
-//            @Override
-//            public void onCancelled(FirebaseError firebaseError) {
-//                Log.d("TAG", "Read failed");
-//            }
-//        });
+        mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                mWelcomeTextView.setText("Welcome, " + user.getName() + ", to");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("TAG", "Read failed");
+            }
+        });
     }
 
     @Override
