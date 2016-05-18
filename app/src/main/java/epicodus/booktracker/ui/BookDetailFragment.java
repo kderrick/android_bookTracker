@@ -43,6 +43,9 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.editBookButton) Button mEditBookButton;
 
     @Bind(R.id.currentPageTextView) TextView mCurrentPageTextView;
+    @Bind(R.id.avgPageTextView) TextView mAvgPageTextView;
+    @Bind(R.id.endDateTextView) TextView mEndDateTextView;
+    @Bind(R.id.startDateTextView) TextView mStartDateTextView;
 
     private SharedPreferences mSharedPreferences;
     private Book mBook;
@@ -90,6 +93,10 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         } else {
             mSaveBookButton.setOnClickListener(this);
             mEditBookButton.setVisibility(View.GONE);
+            mCurrentPageTextView.setVisibility(View.GONE);
+            mAvgPageTextView.setVisibility(View.GONE);
+            mStartDateTextView.setVisibility(View.GONE);
+            mEndDateTextView.setVisibility(View.GONE);
         }
 
         Picasso.with(view.getContext()).load(mBook.getImage()).into(mImageLabel);
