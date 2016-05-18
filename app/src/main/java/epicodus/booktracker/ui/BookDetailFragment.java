@@ -150,7 +150,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         confirmEditBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentPageTextView.setText(currentPageEditText.getText().toString());
+                mCurrentPageTextView.setText(currentPageEditText.getText().toString() + "/" + mBook.getPageCount());
                 dialog.dismiss();
             }
         });
