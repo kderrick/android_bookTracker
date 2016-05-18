@@ -117,7 +117,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         }
         mAuthorLabel.setText(mBook.getAuthor());
         mBookNameLabel.setText(mBook.getTitle());
-        mDescriptionLabel.setText(mBook.getDescription());
+        mDescriptionLabel.setText("Description:\n" + mBook.getDescription());
         //mPageCountLabel.setText(mBook.getPageCount());
 
         return view;

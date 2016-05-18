@@ -21,7 +21,7 @@
 
 
             <TextView
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Book Name"
                 android:id="@+id/bookNameTextView"
@@ -126,10 +126,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="published date"
+                    android:text="Published Date:"
                     android:drawablePadding="4dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:textColor="@color/white"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"/>
 
@@ -141,19 +142,21 @@
                     android:drawablePadding="4dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:textColor="@color/white"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"/>
 
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="page count: "
-                android:drawablePadding="4dp"
-                android:id="@+id/pageCountTextView"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pages: "
+                    android:drawablePadding="4dp"
+                    android:id="@+id/pageCountTextView"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"/>
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -165,6 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Description"
+                        android:textColor="@color/white"
                         android:id="@+id/descriptionTextView"
                         android:drawablePadding="4dp"
                         android:textSize="15sp"
@@ -179,19 +183,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save book"
+                android:padding="10dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:id="@+id/saveBookButton"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent"
-                android:textSize="15sp" />
+                android:background="@drawable/login_button"
+                android:textColor="@drawable/login_button_color"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="Edit Details"
                 android:id="@+id/editBookButton"
+                android:background="@drawable/login_button"
+                android:textColor="@drawable/login_button_color"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 
