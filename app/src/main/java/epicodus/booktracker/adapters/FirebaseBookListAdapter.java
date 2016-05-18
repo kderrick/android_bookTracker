@@ -34,7 +34,7 @@ public class FirebaseBookListAdapter extends FirebaseRecyclerAdapter<BookViewHol
     public BookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         View view = LayoutInflater.from(mContext)
-                .inflate(R.layout.book_list_item, parent, false);
+                .inflate(R.layout.book_list_item_drag, parent, false);
         return new BookViewHolder(view, getItems());
     }
 
