@@ -3,9 +3,14 @@ package epicodus.booktracker.ui;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +106,14 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mEndDateTextView.setVisibility(View.GONE);
         }
 
-        Picasso.with(view.getContext()).load(mBook.getImage()).into(mImageLabel);
+            final String imageUrl = mBook.getImage();
+
+        if (TextUtils.isEmpty(imageUrl)) {
+                           mImageLabel.setImageResource(R.drawable.noimage);
+        } else {
+            Picasso.with(view.getContext()).load(mBook.getImage()).into(mImageLabel);
+
+        }
         mAuthorLabel.setText(mBook.getAuthor());
         mBookNameLabel.setText(mBook.getTitle());
         mDescriptionLabel.setText(mBook.getDescription());
