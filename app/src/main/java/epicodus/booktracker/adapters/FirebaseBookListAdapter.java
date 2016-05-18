@@ -46,7 +46,7 @@ public class FirebaseBookListAdapter extends FirebaseRecyclerAdapter<BookViewHol
     @Override
     public void onBindViewHolder(final BookViewHolder holder, int position) {
         holder.bindBook(getItem(position));
-        holder.mAuthorTextView.setOnTouchListener(new View.OnTouchListener() {
+        holder.mTitleTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -60,8 +60,6 @@ public class FirebaseBookListAdapter extends FirebaseRecyclerAdapter<BookViewHol
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(getItems(), fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 
