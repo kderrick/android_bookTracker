@@ -49,6 +49,17 @@
                 android:textStyle="italic" />
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/currentPageTextView"
+            android:layout_width="99dp"
+            android:layout_height="45dp"
+            android:text="219"
+            android:textSize="25sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -135,6 +146,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorAccent"
                 android:textSize="15sp" />
+
         </RelativeLayout>
     </LinearLayout>
 </FrameLayout>
