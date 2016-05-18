@@ -3,14 +3,11 @@ package epicodus.booktracker.ui;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +26,10 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,12 +64,11 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     private Integer mPosition;
     private String mSource;
 
-
     public static BookDetailFragment newInstance(ArrayList<Book> books, Integer position, String source) {
         BookDetailFragment bookDetailFragment = new BookDetailFragment();
 
         Bundle args = new Bundle();
-        args.putParcelable(Constants.EXTRA_KEY_JOBS, Parcels.wrap(books));
+        args.putParcelable(Constants.EXTRA_KEY_BOOKS, Parcels.wrap(books));
         args.putInt(Constants.EXTRA_KEY_POSITION, position);
         args.putString(Constants.KEY_SOURCE, source);
         bookDetailFragment.setArguments(args);
@@ -78,7 +78,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBooks = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_JOBS));
+        mBooks = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_BOOKS));
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         mBook = mBooks.get(mPosition);
@@ -94,13 +94,15 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         mSaveBookButton.setOnClickListener(this);
 
         if (mSource.equals(Constants.SOURCE_SAVED)) {
+            getAvgPagesPerDay();
             mSaveBookButton.setVisibility(View.GONE);
             mPageCountLabel.setVisibility(View.GONE);
             mPublishedDateTextView.setVisibility(View.GONE);
             mCategoryTextView.setVisibility(View.GONE);
             mDescriptionLabel.setVisibility(View.GONE);
             mEditBookButton.setOnClickListener(this);
-            //might not be right
+            mAvgPageTextView.setText(getAvgPagesPerDay());
+            mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
 
         } else {
             mSaveBookButton.setOnClickListener(this);
@@ -139,6 +141,9 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             Date startDate = new Date();
             mBook.setPushId(bookPushId);
             mBook.setStartDate(startDate);
+            String bookId = Constants.KEY_BOOKID;
+            bookId = pushRef.getKey();
+            mBook.setPushId(bookId);
             pushRef.setValue(mBook);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
@@ -158,11 +163,37 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         confirmEditBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentPageTextView.setText(currentPageEditText.getText().toString() + "/" + mBook.getPageCount());
+                String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+                String bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
+                Firebase userBooksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
+
+                String currentPage = currentPageEditText.getText().toString();
+                int currentPageInt = Integer.parseInt(currentPage);
+                mBook.setCurrentPage(currentPageInt);
+                //String currentPageString = currentPageEditText.getText().toString();
+                mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
+
+                Map<String, Object> bookMap = new HashMap<String, Object>();
+                bookMap.put("currentPage", currentPage);
+                userBooksFirebaseRef.updateChildren(bookMap);
                 dialog.dismiss();
             }
         });
         dialog.show();
+    }
+    public String getAvgPagesPerDay() {
+        int avgPages = 0;
+        String avgPagesString = "";
+
+        Date date1 = new Date();
+        if (mBook.getStartDate() != null) {
+            long diff = Math.abs(date1.getTime() - mBook.getStartDate().getTime());
+            long diffDays = diff / (24 * 60 * 60 * 1000);
+            int diffDayInt = (int) diffDays;
+            avgPages = mBook.getCurrentPage() / diffDayInt;
+            avgPagesString = avgPages+"";
+        }
+        return avgPagesString;
     }
 }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.parceler.Parcels;
@@ -44,7 +43,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
                 int mPosition = getLayoutPosition();
                 Intent intent = new Intent(mContext, BookDetailActivity.class);
                 intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);
-                intent.putExtra(Constants.EXTRA_KEY_JOBS, Parcels.wrap(mBooks));
+                intent.putExtra(Constants.EXTRA_KEY_BOOKS, Parcels.wrap(mBooks));
 
                 if (mContext.getClass().getSimpleName().equals(SavedBooksActivity.class.getSimpleName())) {
                     intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_SAVED);

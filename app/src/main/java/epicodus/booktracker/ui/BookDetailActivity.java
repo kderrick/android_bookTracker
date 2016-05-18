@@ -30,7 +30,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mSource = intent.getStringExtra(Constants.KEY_SOURCE);
-        mBooks = Parcels.unwrap(intent.getParcelableExtra(Constants.EXTRA_KEY_JOBS));
+        mBooks = Parcels.unwrap(intent.getParcelableExtra(Constants.EXTRA_KEY_BOOKS));
         Integer startingPosition = intent.getIntExtra(Constants.EXTRA_KEY_POSITION, 0);
 
         adapterViewPager = new BookPagerAdapter(getSupportFragmentManager(), mBooks, mSource);
