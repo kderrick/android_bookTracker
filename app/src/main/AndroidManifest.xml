@@ -26,7 +26,11 @@
                 android:value=".ui.MainActivity"/>
         </activity>
         <activity android:name=".ui.BookDetailActivity"></activity>
-        <activity android:name=".ui.SavedBooksActivity"></activity>
+        <activity android:name=".ui.SavedBooksActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

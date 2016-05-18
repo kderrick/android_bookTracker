@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -135,7 +136,9 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             Firebase userBooksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid);
             Firebase pushRef = userBooksFirebaseRef.push();
             String bookPushId = pushRef.getKey();
+            Date startDate = new Date();
             mBook.setPushId(bookPushId);
+            mBook.setStartDate(startDate);
             pushRef.setValue(mBook);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
