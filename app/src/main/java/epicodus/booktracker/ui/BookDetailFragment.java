@@ -34,12 +34,15 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.bookImageView) ImageView mImageLabel;
     @Bind(R.id.authorTextView) TextView mAuthorLabel;
     @Bind(R.id.bookNameTextView) TextView mBookNameLabel;
-    @Bind(R.id.categoryTextView) TextView mCategoryLabel;
+//    @Bind(R.id.categoryTextView) TextView mCategoryLabel;
     @Bind(R.id.descriptionTextView) TextView mDescriptionLabel;
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
     @Bind(R.id.editBookButton) Button mEditBookButton;
+    @Bind(R.id. publishDateTextView) TextView mPublishDateLabel;
+//    @Bind(R.id. currentPageTextView) TextView mCurrentPageTextView;
     private SharedPreferences mSharedPreferences;
+
     private Book mBook;
 
     private ArrayList<Book> mBooks;
@@ -78,6 +81,9 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         if (mSource.equals(Constants.SOURCE_SAVED)) {
             mSaveBookButton.setVisibility(View.GONE);
             mEditBookButton.setOnClickListener(this);
+            mDescriptionLabel.setVisibility(View.GONE);
+            mPublishDateLabel.setVisibility(View.GONE);
+
 
         } else {
             mSaveBookButton.setOnClickListener(this);
@@ -89,6 +95,8 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         mBookNameLabel.setText(mBook.getTitle());
         mDescriptionLabel.setText(mBook.getDescription());
         //mPageCountLabel.setText(mBook.getPageCount());
+        mPublishDateLabel.setText("Date published: " + mBook.getPublishedDate());
+        mPageCountLabel.setText("Pages: " + Integer.toString(mBook.getPageCount()));
 
         return view;
     }

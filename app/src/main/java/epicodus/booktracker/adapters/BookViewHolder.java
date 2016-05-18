@@ -25,6 +25,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.bookNameTextView) TextView mTitleTextView;
     @Bind(R.id.authorTextView) TextView mAuthorTextView;
 
+
     private ArrayList<Book> mBooks = new ArrayList<>();
     private Context mContext;
     private Integer mPosition;
