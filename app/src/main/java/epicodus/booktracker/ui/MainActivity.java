@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.savedBooksButton) Button mSavedBooksButton;
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
-    @Bind(R.id.testTextView) TextView mTestTextView;
+    @Bind(R.id.totalLibraryTextView) TextView mTotalLibraryTextView;
+    @Bind(R.id.finishedBookTextView) TextView mFinishedBookTextView;
 
     private ValueEventListener mUserRefListener;
     private ValueEventListener mUserBookRefListener;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Firebase mFirebaseRef;
     private Firebase mFirebaseRefBooks;
     private ArrayList<Book> bookArray = new ArrayList<>();
+    private ArrayList<Book> finishedBookArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +72,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFirebaseRefBooks = new Firebase(Constants.FIREBASE_URL_BOOKS + "/" + userUid);
 //      allBooks provides link to logged in users books
 
-//        System.out.println(mFirebaseRefBooks);
-
-
         mUserBookRefListener = mFirebaseRefBooks.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Book book = snapshot.getValue(Book.class);
                     bookArray.add(book);
+                    if( book.getCurrentPage() >= book.getPageCount()) {
+                        finishedBookArray.add(book);
+                    }
                 }
-                mTestTextView.setText(""+ bookArray.size());
-                System.out.println(bookArray.get(0).getAuthor());
+                mTotalLibraryTextView.setText("Total number of books in library: "+ bookArray.size());
+                mFinishedBookTextView.setText("Total number of finished books: "+ finishedBookArray.size());
+//
             }
 
             @Override

@@ -55,10 +55,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/testTextView"
+        android:id="@+id/totalLibraryTextView"
+        android:textSize="30sp"
+        android:layout_below="@+id/appNameTextView"
+        android:layout_alignLeft="@+id/welcomeTextView"
+        android:layout_alignStart="@+id/welcomeTextView"
+        android:layout_marginTop="46dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/finishedBookTextView"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/welcomeTextView"
-        android:layout_alignEnd="@+id/welcomeTextView"
+        android:layout_centerHorizontal="true"
         android:textSize="30sp" />
 
 </RelativeLayout>
