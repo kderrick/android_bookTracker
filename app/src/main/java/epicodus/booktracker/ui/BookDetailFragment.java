@@ -238,15 +238,13 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 String endDateString = new SimpleDateFormat("MM/dd/yyyy").format(finishStateDate);
                 mEndDateTextView.setText("- " + endDateString);
                 break;
+            case R.id.previewButton:
+                String link = mBook.getPreviewLink();
+                Log.d(TAG, link);
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                startActivity(webIntent);
             default:
                 break;
-        }
-
-        if (view == mPreviewButton) {
-            String link = mBook.getPreviewLink();
-            Log.d(TAG, link);
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-            startActivity(webIntent);
         }
     }
 
