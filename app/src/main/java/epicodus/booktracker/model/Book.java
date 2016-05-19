@@ -15,6 +15,7 @@ public class Book {
     String image;
     String description;
     double aveRating;
+    String previewLink;
     int pageCount;
     String publishedDate;
     private String pushId;
@@ -26,12 +27,13 @@ public class Book {
     int avgPagesPerDay = 0;
     public Book() {}
 
-    public Book(String title, String author, String image, String description, double aveRating, int pageCount, String publishedDate) {
+    public Book(String title, String author, String image, String description, double aveRating, String previewLink, int pageCount, String publishedDate) {
         this.title = title;
         this.author = author;
         this.image = image;
         this.description = description;
         this.aveRating = aveRating;
+        this.previewLink = previewLink;
         this.pageCount = pageCount;
         this.publishedDate = publishedDate;
         this.index = "not_specified";
@@ -57,6 +59,8 @@ public class Book {
     public double getAveRating() {
         return aveRating;
     }
+
+    public String getPreviewLink() {return previewLink;}
 
     public int getPageCount() {
         return pageCount;
