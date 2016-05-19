@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences mSharedPreferences;
     private Firebase mFirebaseRef;
     private Firebase mFirebaseRefBooks;
-    private ArrayList<Book> bookArray = new ArrayList<>();
-    private ArrayList<Book> finishedBookArray = new ArrayList<>();
+//    private ArrayList<Book> bookArray = new ArrayList<>();
+//    private ArrayList<Book> finishedBookArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mUserBookRefListener = mFirebaseRefBooks.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Book> bookArray = new ArrayList<>();
+                ArrayList<Book> finishedBookArray = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Book book = snapshot.getValue(Book.class);
                     bookArray.add(book);
