@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -59,6 +60,10 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.startDateTextView) TextView mStartDateTextView;
     @Bind(R.id.startReadingButton) Button mStartReadingButton;
     @Bind(R.id.finishReadingButton) Button mFinishReadingButton;
+    @Bind(R.id.avgPagesLabelTextView) TextView mAvgPagesLabelTextView;
+    @Bind(R.id.startDateLabelTextView) TextView mStartDateLabelTextView;
+    @Bind(R.id.endDateLabelTextView) TextView mEndDateLabelTextView;
+    @Bind(R.id.totalPagesReadTextView) TextView mTotalPagesReadTextView;
 
     private SharedPreferences mSharedPreferences;
     private Book mBook;
@@ -102,15 +107,24 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mCategoryTextView.setVisibility(View.GONE);
             mDescriptionLabel.setVisibility(View.GONE);
             mFinishReadingButton.setVisibility(View.INVISIBLE);
-
+            mStartDateLabelTextView.setVisibility(View.INVISIBLE);
+            mEndDateLabelTextView.setVisibility(View.INVISIBLE);
+            mTotalPagesReadTextView.setVisibility(View.VISIBLE);
+            mTotalPagesReadTextView.setText("Total Pages Read");
             if (mBook.getStartDate() != null) {
-                mStartDateTextView.setText("Start Date: " + mBook.getStartDate());
+                Date currentStateDate = mBook.getStartDate();
+                String startDateString = new SimpleDateFormat("MM/dd/yyyy").format(currentStateDate);
+                mStartDateTextView.setText("" + startDateString);
                 mStartReadingButton.setVisibility(View.GONE);
+                mStartDateLabelTextView.setVisibility(View.VISIBLE);
                 mFinishReadingButton.setVisibility(View.VISIBLE);
                 if (mBook.getEndDate() != null) {
                     mFinishReadingButton.setVisibility(View.INVISIBLE);
                     mEditBookButton.setVisibility(View.INVISIBLE);
-                    mEndDateTextView.setText("Finish Date: " + mBook.getEndDate());
+                    mEndDateLabelTextView.setVisibility(View.VISIBLE);
+                    Date finishStateDate = mBook.getEndDate();
+                    String endDateString = new SimpleDateFormat("MM/dd/yyyy").format(finishStateDate);
+                    mEndDateTextView.setText("- " + endDateString);
                 }
             } else {
                 mStartDateTextView.setText("");
@@ -133,7 +147,10 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mEndDateTextView.setVisibility(View.GONE);
             mStartReadingButton.setVisibility(View.GONE);
             mFinishReadingButton.setVisibility(View.GONE);
-
+            mAvgPagesLabelTextView.setVisibility(View.GONE);
+            mStartDateLabelTextView.setVisibility(View.GONE);
+            mEndDateTextView.setVisibility(View.GONE);
+            mTotalPagesReadTextView.setVisibility(View.GONE);
             mSaveBookButton.setOnClickListener(this);
         }
 
@@ -176,9 +193,12 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 mStartReadingButton.setVisibility(View.INVISIBLE);
                 mFinishReadingButton.setVisibility(View.VISIBLE);
                 mEditBookButton.setVisibility(View.VISIBLE);
+                mStartDateLabelTextView.setVisibility(View.VISIBLE);
                 Date newStartDate = new Date();
                 mBook.setStartDate(newStartDate);
-                mStartDateTextView.setText("Start Date: " + mBook.getStartDate());
+                Date currentStateDate = mBook.getStartDate();
+                String startDateString = new SimpleDateFormat("MM/dd/yyyy").format(currentStateDate);
+                mStartDateTextView.setText("" + startDateString);
                 userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
                 String bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
                 Firebase booksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
@@ -188,6 +208,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 mFinishReadingButton.setVisibility(View.GONE);
                 mEditBookButton.setVisibility(View.INVISIBLE);
                 mEndDateTextView.setVisibility(View.VISIBLE);
+                mEndDateLabelTextView.setVisibility(View.VISIBLE);
                 //sets endDate for finishedBook
                 Date finishBookDate = new Date();
                 mBook.setEndDate(finishBookDate);
@@ -205,9 +226,9 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 getAvgPagesPerDay();
                 mCurrentPageTextView.setText(mBook.getCurrentPage()+"");
 
-                Log.v("endDate", mBook.getEndDate()+"");
-
-                mEndDateTextView.setText("Finish Date: " + mBook.getEndDate());
+                Date finishStateDate = mBook.getEndDate();
+                String endDateString = new SimpleDateFormat("MM/dd/yyyy").format(finishStateDate);
+                mEndDateTextView.setText("- " + endDateString);
                 break;
             default:
                 break;

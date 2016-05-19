@@ -2,6 +2,7 @@ package epicodus.booktracker.model;
 
 import org.parceler.Parcel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
