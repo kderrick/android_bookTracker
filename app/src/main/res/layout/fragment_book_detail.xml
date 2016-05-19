@@ -62,10 +62,10 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="158dp"
+            android:layout_height="209dp"
             android:id="@+id/readingProgressRelativeLayout"
             android:background="@color/colorPrimaryDark"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="40dp"
             >
             <TextView
@@ -75,60 +75,113 @@
                 android:id="@+id/startDateTextView"
                 android:textSize="25sp"
                 android:textColor="@color/white"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginBottom="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Finished"
                 android:textColor="@color/white"
                 android:id="@+id/endDateTextView"
                 android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_alignLeft="@+id/startDateTextView"
-                android:layout_alignStart="@+id/startDateTextView" />
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/startDateTextView"
+                android:layout_toEndOf="@+id/startDateTextView"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pages Per Day"
+                android:text="0"
                 android:id="@+id/avgPageTextView"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/endDateTextView"
-                android:layout_alignStart="@+id/endDateTextView" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="37dp"
+                android:layout_marginStart="37dp"/>
 
             <TextView
                 android:id="@+id/currentPageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:layout_marginRight="15dp"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                android:layout_above="@+id/editBookButton"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_centerVertical="true"
+                android:layout_alignRight="@+id/editBookButton"
+                android:layout_alignEnd="@+id/editBookButton"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:layout_marginRight="5dp"
                 android:text="Update"
                 android:id="@+id/editBookButton"
                 android:background="@drawable/login_button"
                 android:textColor="@drawable/login_button_color"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_alignParentBottom="true"
+                android:layout_marginRight="28dp"
+                android:layout_alignBottom="@+id/avgPagesLabelTextView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="28dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avg Pages/Day"
+                android:id="@+id/avgPagesLabelTextView"
+                android:layout_above="@+id/avgPageTextView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date"
+                android:id="@+id/startDateLabelTextView"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/startDateTextView"
+                android:layout_alignStart="@+id/startDateTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date"
+                android:id="@+id/endDateLabelTextView"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/editBookButton"
+                android:layout_alignStart="@+id/editBookButton"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/totalPagesReadTextView"
+                android:layout_above="@+id/currentPageTextView"
                 android:layout_alignRight="@+id/currentPageTextView"
-                android:layout_alignEnd="@+id/currentPageTextView" />
+                android:layout_alignEnd="@+id/currentPageTextView"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
 
         </RelativeLayout>
