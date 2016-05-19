@@ -15,15 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import epicodus.booktracker.Constants;
 import epicodus.booktracker.R;
+import epicodus.booktracker.model.Book;
 import epicodus.booktracker.model.User;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,13 +36,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.savedBooksButton) Button mSavedBooksButton;
     @Bind(R.id.welcomeTextView) TextView mWelcomeTextView;
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
+    @Bind(R.id.testTextView) TextView mTestTextView;
 
     private ValueEventListener mUserRefListener;
+    private ValueEventListener mUserBookRefListener;
     private Firebase mUserRef;
     private String mUId;
     private SharedPreferences mSharedPreferences;
     private Firebase mFirebaseRef;
     private Firebase mFirebaseRefBooks;
+    private ArrayList<Book> bookArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +57,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
         mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
-//        System.out.println(mUserRef);
 
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-        mFirebaseRefBooks = new Firebase(Constants.FIREBASE_URL_BOOKS);
+
 
 
 
         mFindBooksButton.setOnClickListener(this);
         mSavedBooksButton.setOnClickListener(this);
 
-        String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
-        String allBooks = mFirebaseRefBooks.child(userUid).toString();
+        final String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+        mFirebaseRefBooks = new Firebase(Constants.FIREBASE_URL_BOOKS + "/" + userUid);
 //      allBooks provides link to logged in users books
+
+//        System.out.println(mFirebaseRefBooks);
+
+
+        mUserBookRefListener = mFirebaseRefBooks.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Book book = snapshot.getValue(Book.class);
+                    bookArray.add(book);
+                }
+                mTestTextView.setText(""+ bookArray.size());
+                System.out.println(bookArray.get(0).getAuthor());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d("TAG", "Read failed");
+            }
+        });
+
 
         mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
