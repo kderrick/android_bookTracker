@@ -221,6 +221,22 @@
                 android:textSize="15sp"
                 android:textStyle="bold"/>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Reading!"
+                android:id="@+id/startReadingButton"
+                android:layout_above="@+id/finishReadingButton"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All Done!"
+                android:id="@+id/finishReadingButton"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
         </RelativeLayout>
 
     </LinearLayout>
