@@ -190,7 +190,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             long diff = Math.abs(date1.getTime() - mBook.getStartDate().getTime());
             long diffDays = diff / (24 * 60 * 60 * 1000);
             int diffDayInt = (int) diffDays;
-            if (mBook.getCurrentPage() != 0) {
+            if (mBook.getCurrentPage() != 0 && diffDayInt != 0) {
                 avgPages = mBook.getCurrentPage() / diffDayInt;
             }
             avgPagesString = avgPages + "";
