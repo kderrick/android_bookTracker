@@ -56,6 +56,8 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.avgPageTextView) TextView mAvgPageTextView;
     @Bind(R.id.endDateTextView) TextView mEndDateTextView;
     @Bind(R.id.startDateTextView) TextView mStartDateTextView;
+    @Bind(R.id.startReadingButton) Button mStartReadingButton;
+    @Bind(R.id.finishReadingButton) Button mFinishReadingButton;
 
     private SharedPreferences mSharedPreferences;
     private Book mBook;
@@ -82,7 +84,6 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         mBook = mBooks.get(mPosition);
-
         mSource = getArguments().getString(Constants.KEY_SOURCE);
         setHasOptionsMenu(true);
     }
@@ -94,35 +95,48 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         mSaveBookButton.setOnClickListener(this);
 
         if (mSource.equals(Constants.SOURCE_SAVED)) {
-            getAvgPagesPerDay();
             mSaveBookButton.setVisibility(View.GONE);
             mPageCountLabel.setVisibility(View.GONE);
             mPublishedDateTextView.setVisibility(View.GONE);
             mCategoryTextView.setVisibility(View.GONE);
             mDescriptionLabel.setVisibility(View.GONE);
+            mFinishReadingButton.setVisibility(View.INVISIBLE);
+            if (mBook.getStartDate() != null) {
+                mStartDateTextView.setText("Start Date: " + mBook.getStartDate());
+                mStartReadingButton.setVisibility(View.GONE);
+                mFinishReadingButton.setVisibility(View.VISIBLE);
+            } else {
+                mStartDateTextView.setText("Starting reading!");
+            }
+
+            mStartReadingButton.setOnClickListener(this);
+            mFinishReadingButton.setOnClickListener(this);
             mEditBookButton.setOnClickListener(this);
             mAvgPageTextView.setText(getAvgPagesPerDay());
             mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
 
         } else {
-            mSaveBookButton.setOnClickListener(this);
             mReadingProgressRelativeLayout.setVisibility(View.GONE);
             mEditBookButton.setVisibility(View.GONE);
             mCurrentPageTextView.setVisibility(View.GONE);
             mAvgPageTextView.setVisibility(View.GONE);
             mStartDateTextView.setVisibility(View.GONE);
             mEndDateTextView.setVisibility(View.GONE);
+            mStartReadingButton.setVisibility(View.GONE);
+            mFinishReadingButton.setVisibility(View.GONE);
+
+            mSaveBookButton.setOnClickListener(this);
         }
 
-            final String imageUrl = mBook.getImage();
+        final String imageUrl = mBook.getImage();
 
         if (TextUtils.isEmpty(imageUrl)) {
             Picasso.with(view.getContext()).load(R.drawable.noimage).resize(400, 600).into(mImageLabel);
 //                           mImageLabel.setImageResource(R.drawable.noimage);
         } else {
             Picasso.with(view.getContext()).load(mBook.getImage()).resize(400, 600).into(mImageLabel);
-
         }
+
         mAuthorLabel.setText(mBook.getAuthor());
         mBookNameLabel.setText(mBook.getTitle());
         mDescriptionLabel.setText("Description:\n" + mBook.getDescription());
@@ -132,23 +146,39 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View view) {
-        if (view == mSaveBookButton) {
-            String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
-            Firebase userBooksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid);
-            Firebase pushRef = userBooksFirebaseRef.push();
-            String bookPushId = pushRef.getKey();
-            Date startDate = new Date();
-            mBook.setPushId(bookPushId);
-            mBook.setStartDate(startDate);
-            String bookId = Constants.KEY_BOOKID;
-            bookId = pushRef.getKey();
-            mBook.setPushId(bookId);
-            pushRef.setValue(mBook);
-            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
-        }
-        if (view == mEditBookButton) {
-            showEditBookDialog();
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.saveBookButton:
+                String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+                Firebase userBooksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid);
+                Firebase pushRef = userBooksFirebaseRef.push();
+                String bookPushId = pushRef.getKey();
+                mBook.setPushId(bookPushId);
+                String bookId = Constants.KEY_BOOKID;
+                bookId = pushRef.getKey();
+                mBook.setPushId(bookId);
+                pushRef.setValue(mBook);
+                Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.editBookButton:
+                showEditBookDialog();
+                break;
+            case R.id.startReadingButton:
+                mStartReadingButton.setVisibility(View.INVISIBLE);
+                mFinishReadingButton.setVisibility(View.VISIBLE);
+                Date newStartDate = new Date();
+                mBook.setStartDate(newStartDate);
+                mStartDateTextView.setText("Start Date: " + mBook.getStartDate());
+                userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+                String bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
+                Firebase booksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
+                booksFirebaseRef.child("startDate").setValue(newStartDate);
+                break;
+            case R.id.finishReadingButton:
+                mFinishReadingButton.setVisibility(View.GONE);
+                break;
+            default:
+                break;
         }
     }
 
@@ -163,19 +193,19 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         confirmEditBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
-                String bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
-                Firebase userBooksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
-
                 String currentPage = currentPageEditText.getText().toString();
                 int currentPageInt = Integer.parseInt(currentPage);
                 mBook.setCurrentPage(currentPageInt);
                 //String currentPageString = currentPageEditText.getText().toString();
                 mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
 
+                String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+                String bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
+                Firebase booksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
                 Map<String, Object> bookMap = new HashMap<String, Object>();
                 bookMap.put("currentPage", currentPage);
-                userBooksFirebaseRef.updateChildren(bookMap);
+                booksFirebaseRef.updateChildren(bookMap);
+                getAvgPagesPerDay();
                 dialog.dismiss();
             }
         });
@@ -183,17 +213,21 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     }
     public String getAvgPagesPerDay() {
         int avgPages = 0;
-        String avgPagesString = "";
+        String avgPagesString = "Start reading!";
 
         Date date1 = new Date();
         if (mBook.getStartDate() != null) {
             long diff = Math.abs(date1.getTime() - mBook.getStartDate().getTime());
             long diffDays = diff / (24 * 60 * 60 * 1000);
             int diffDayInt = (int) diffDays;
-            if (mBook.getCurrentPage() != 0) {
+            if (mBook.getCurrentPage() != 0 && diffDayInt != 0) {
                 avgPages = mBook.getCurrentPage() / diffDayInt;
+                Log.v("avgPages", avgPages+"");
+                avgPagesString = avgPages + "";
+                mAvgPageTextView.setText(avgPagesString);
+            } else {
+                mAvgPageTextView.setText(mBook.getCurrentPage()+"");
             }
-            avgPagesString = avgPages + "";
         }
         return avgPagesString;
     }
