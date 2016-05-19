@@ -8,7 +8,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="left|center_vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
 
             <TextView
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Book Name"
                 android:id="@+id/bookNameTextView"
@@ -61,15 +62,21 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="158dp"
             android:id="@+id/readingProgressRelativeLayout"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="startDate"
+                android:text="Started"
                 android:id="@+id/startDateTextView"
-                android:textSize="20sp"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -77,83 +84,106 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="endDate"
+                android:text="Finished"
+                android:textColor="@color/white"
                 android:id="@+id/endDateTextView"
-                android:textSize="20sp"
-                android:layout_alignParentTop="true"
-                android:layout_alignLeft="@+id/currentPageTextView"
-                android:layout_alignStart="@+id/currentPageTextView" />
+                android:textSize="25sp"
+                android:layout_centerVertical="true"
+                android:layout_alignLeft="@+id/startDateTextView"
+                android:layout_alignStart="@+id/startDateTextView" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="avgPagesPerDay"
+                android:text="Pages Per Day"
                 android:id="@+id/avgPageTextView"
-                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignLeft="@+id/endDateTextView"
+                android:layout_alignStart="@+id/endDateTextView" />
 
             <TextView
                 android:id="@+id/currentPageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="currentPage"
-                android:textSize="20sp"
+                android:text="0"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:layout_above="@+id/editBookButton"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginRight="5dp"
+                android:text="Update"
+                android:id="@+id/editBookButton"
+                android:background="@drawable/login_button"
+                android:textColor="@drawable/login_button_color"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/currentPageTextView"
+                android:layout_alignEnd="@+id/currentPageTextView" />
+
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/bookDetailsRelativeLayout">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_above="@+id/saveBookButton"
                 android:paddingLeft="30dp"
                 android:paddingTop="20dp"
                 android:paddingRight="30dp"
-                android:weightSum="1">
+                android:weightSum="1"
+                android:layout_alignParentTop="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="published date"
+                    android:text="Published Date:"
+                    android:id="@+id/publishedDateTextView"
                     android:drawablePadding="4dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
                     android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Category"
+                    android:text="Category:"
                     android:id="@+id/categoryTextView"
                     android:drawablePadding="4dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"/>
 
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="page count: "
-                android:drawablePadding="4dp"
-                android:id="@+id/pageCountTextView"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pages: "
+                    android:drawablePadding="4dp"
+                    android:id="@+id/pageCountTextView"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"/>
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -165,10 +195,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Description"
+                        android:textColor="@color/white"
                         android:id="@+id/descriptionTextView"
                         android:drawablePadding="4dp"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
+                        android:textSize="18sp"
                         android:layout_marginBottom="10dp"
                         android:gravity="center" />
                 </ScrollView>
@@ -179,19 +209,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save book"
+                android:padding="10dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:id="@+id/saveBookButton"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent"
-                android:textSize="15sp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Edit Details"
-                android:id="@+id/editBookButton"
-                android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent"
-                android:textSize="15sp" />
+                android:background="@drawable/login_button"
+                android:textColor="@drawable/login_button_color"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 
