@@ -109,6 +109,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 mFinishReadingButton.setVisibility(View.VISIBLE);
                 if (mBook.getEndDate() != null) {
                     mFinishReadingButton.setVisibility(View.INVISIBLE);
+                    mEditBookButton.setVisibility(View.INVISIBLE);
                     mEndDateTextView.setText("Finish Date: " + mBook.getEndDate());
                 }
             } else {
