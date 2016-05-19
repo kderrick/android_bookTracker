@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +45,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         ButterKnife.bind(this);
+
+        Spannable spannable = (Spannable)mLoginTextView.getText();
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources()
+                .getColor(R.color.colorOrange));
+        spannable.setSpan( colorSpan, 31, 36, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mSharedPreferencesEditor = mSharedPreferences.edit();

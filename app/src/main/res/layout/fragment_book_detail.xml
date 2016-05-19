@@ -130,6 +130,23 @@
                 android:layout_alignRight="@+id/currentPageTextView"
                 android:layout_alignEnd="@+id/currentPageTextView" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Reading!"
+                android:id="@+id/startReadingButton"
+
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All Done!"
+                android:id="@+id/finishReadingButton"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
@@ -150,7 +167,8 @@
                 android:paddingTop="20dp"
                 android:paddingRight="30dp"
                 android:weightSum="1"
-                android:layout_alignParentTop="true">
+                android:layout_alignParentTop="true"
+                android:id="@+id/linearLayout">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -173,6 +191,7 @@
                     android:textColor="@color/white"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -220,22 +239,6 @@
                 android:textColor="@drawable/login_button_color"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start Reading!"
-                android:id="@+id/startReadingButton"
-                android:layout_above="@+id/finishReadingButton"
-                android:layout_centerHorizontal="true" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="All Done!"
-                android:id="@+id/finishReadingButton"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
