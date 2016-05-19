@@ -73,6 +73,8 @@ public class GoogleBookService {
 
                     double aveRating = basicInfoJSON.optDouble("averageRating");
 
+                    String previewLink = volumeInfoJSON.optString("previewLink");
+
 //                    String retailPrice = "";
 //                    if (basicInfoJSON.getJSONObject("saleInfo") != null) {
 //                        retailPrice = basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").getString("amount");
@@ -81,7 +83,7 @@ public class GoogleBookService {
                     int pageCount = volumeInfoJSON.optInt("pageCount");
                     String publishedDate = volumeInfoJSON.optString("publishedDate");
 
-                    Book book = new Book(title, author, image, description, aveRating, pageCount, publishedDate);
+                    Book book = new Book(title, author, image, description, aveRating, previewLink, pageCount, publishedDate);
                     books.add(book);
                     Log.v("BOOKS", books.toString());
                 }

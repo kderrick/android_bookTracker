@@ -2,7 +2,9 @@ package epicodus.booktracker.ui;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -52,6 +54,10 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.editBookButton) Button mEditBookButton;
     @Bind(R.id.readingProgressRelativeLayout) RelativeLayout mReadingProgressRelativeLayout;
 
+    public static final String TAG = BookDetailFragment.class.getSimpleName();
+
+    @Bind(R.id.previewButton) Button mPreviewButton;
+
     @Bind(R.id.currentPageTextView) TextView mCurrentPageTextView;
     @Bind(R.id.avgPageTextView) TextView mAvgPageTextView;
     @Bind(R.id.endDateTextView) TextView mEndDateTextView;
@@ -92,6 +98,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.fragment_book_detail, container, false);
         ButterKnife.bind(this, view);
         mSaveBookButton.setOnClickListener(this);
+        mPreviewButton.setOnClickListener(this);
 
         if (mSource.equals(Constants.SOURCE_SAVED)) {
             getAvgPagesPerDay();
@@ -101,6 +108,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mCategoryTextView.setVisibility(View.GONE);
             mDescriptionLabel.setVisibility(View.GONE);
             mEditBookButton.setOnClickListener(this);
+            mPreviewButton.setVisibility(View.GONE);
             mAvgPageTextView.setText(getAvgPagesPerDay());
             mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
 
@@ -126,7 +134,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         mAuthorLabel.setText(mBook.getAuthor());
         mBookNameLabel.setText(mBook.getTitle());
         mDescriptionLabel.setText("Description:\n" + mBook.getDescription());
-        //mPageCountLabel.setText(mBook.getPageCount());
+
 
         return view;
     }
@@ -149,6 +157,13 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         }
         if (view == mEditBookButton) {
             showEditBookDialog();
+        }
+
+        if (view == mPreviewButton) {
+            String link = mBook.getPreviewLink();
+            Log.d(TAG, link);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+            startActivity(webIntent);
         }
     }
 
