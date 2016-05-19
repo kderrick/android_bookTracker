@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.squareup.picasso.Picasso;
 
@@ -101,12 +102,18 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mCategoryTextView.setVisibility(View.GONE);
             mDescriptionLabel.setVisibility(View.GONE);
             mFinishReadingButton.setVisibility(View.INVISIBLE);
+
             if (mBook.getStartDate() != null) {
                 mStartDateTextView.setText("Start Date: " + mBook.getStartDate());
                 mStartReadingButton.setVisibility(View.GONE);
                 mFinishReadingButton.setVisibility(View.VISIBLE);
+                if (mBook.getEndDate() != null) {
+                    mFinishReadingButton.setVisibility(View.INVISIBLE);
+                    mEndDateTextView.setText("Finish Date: " + mBook.getEndDate());
+                }
             } else {
-                mStartDateTextView.setText("Start reading!");
+                mStartDateTextView.setText("");
+                mEndDateTextView.setVisibility(View.INVISIBLE);
                 mEditBookButton.setVisibility(View.INVISIBLE);
             }
 
@@ -178,6 +185,28 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.finishReadingButton:
                 mFinishReadingButton.setVisibility(View.GONE);
+                mEditBookButton.setVisibility(View.INVISIBLE);
+                mEndDateTextView.setVisibility(View.VISIBLE);
+                //sets endDate for finishedBook
+                Date finishBookDate = new Date();
+                mBook.setEndDate(finishBookDate);
+                userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+                bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
+                booksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
+                booksFirebaseRef.child("endDate").setValue(finishBookDate);
+                //sets currentPage
+                mBook.setCurrentPage(mBook.getPageCount());
+                int currentPage = mBook.getPageCount();
+                Map<String, Object> bookMap = new HashMap<String, Object>();
+                bookMap.put("currentPage", currentPage);
+                booksFirebaseRef.updateChildren(bookMap);
+                //sets avgPagesPerDay
+                getAvgPagesPerDay();
+                mCurrentPageTextView.setText(mBook.getCurrentPage()+"");
+
+                Log.v("endDate", mBook.getEndDate()+"");
+
+                mEndDateTextView.setText("Finish Date: " + mBook.getEndDate());
                 break;
             default:
                 break;
@@ -197,25 +226,30 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 String currentPage = currentPageEditText.getText().toString();
                 int currentPageInt = Integer.parseInt(currentPage);
-                mBook.setCurrentPage(currentPageInt);
-                //String currentPageString = currentPageEditText.getText().toString();
-                mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
-
                 String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
                 String bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
                 Firebase booksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
-                Map<String, Object> bookMap = new HashMap<String, Object>();
-                bookMap.put("currentPage", currentPage);
-                booksFirebaseRef.updateChildren(bookMap);
-                getAvgPagesPerDay();
+
+                if (Integer.parseInt(currentPage) < mBook.getPageCount() && !(currentPage.equals("")) && (Integer.parseInt(currentPage) > 0)) {
+                    mBook.setCurrentPage(currentPageInt);
+                    mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
+                    Map<String, Object> bookMap = new HashMap<String, Object>();
+                    bookMap.put("currentPage", currentPage);
+                    booksFirebaseRef.updateChildren(bookMap);
+                    avgPagesPerDayFirebase(Integer.parseInt(getAvgPagesPerDay()), booksFirebaseRef);
+                }
                 dialog.dismiss();
             }
         });
         dialog.show();
     }
     public String getAvgPagesPerDay() {
+        String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+        String bookID = mSharedPreferences.getString(Constants.KEY_BOOKID, mBook.getPushId());
+        Firebase booksFirebaseRef = new Firebase(Constants.FIREBASE_URL_BOOKS).child(userUid).child(bookID);
+
         int avgPages = 0;
-        String avgPagesString = "Start reading!";
+        String avgPagesString = "0";
 
         Date date1 = new Date();
         if (mBook.getStartDate() != null) {
@@ -224,15 +258,25 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             int diffDayInt = (int) diffDays;
             if (mBook.getCurrentPage() != 0 && diffDayInt != 0) {
                 avgPages = mBook.getCurrentPage() / diffDayInt;
-                Log.v("avgPages", avgPages+"");
                 avgPagesString = avgPages + "";
+                avgPagesPerDayFirebase(avgPages, booksFirebaseRef);
                 mAvgPageTextView.setText(avgPagesString);
             } else {
-                mAvgPageTextView.setText(mBook.getCurrentPage()+"");
+                avgPages = mBook.getCurrentPage();
+                avgPagesString = avgPages + "";
+                avgPagesPerDayFirebase(avgPages, booksFirebaseRef);
+                mAvgPageTextView.setText(avgPages+"");
             }
         }
         return avgPagesString;
     }
+
+    public void avgPagesPerDayFirebase(int avgPages, Firebase booksFirebaseRef) {
+        Map<String, Object> bookMap = new HashMap<String, Object>();
+        bookMap.put("avgPagesPerDay", avgPages);
+        booksFirebaseRef.updateChildren(bookMap);
+    }
+
 }
 
 

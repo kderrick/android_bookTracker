@@ -22,7 +22,7 @@ public class Book {
     Date startDate;
     Date endDate;
     int currentPage;
-
+    int avgPagesPerDay = 0;
     public Book() {}
 
     public Book(String title, String author, String image, String description, double aveRating, int pageCount, String publishedDate) {
@@ -103,5 +103,13 @@ public class Book {
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public int getAvgPagesPerDay() {
+        return avgPagesPerDay;
+    }
+
+    public void setAvgPagesPerDay(int avePagesPerDay) {
+        this.avgPagesPerDay = avePagesPerDay;
     }
 }
