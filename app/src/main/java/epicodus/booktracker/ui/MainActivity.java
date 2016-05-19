@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String mUId;
     private SharedPreferences mSharedPreferences;
     private Firebase mFirebaseRef;
+    private Firebase mFirebaseRefBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +49,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
         mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
+//        System.out.println(mUserRef);
 
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
+        mFirebaseRefBooks = new Firebase(Constants.FIREBASE_URL_BOOKS);
+
+
 
         mFindBooksButton.setOnClickListener(this);
         mSavedBooksButton.setOnClickListener(this);
 
-//       TODO:ADD IN PROJECT - Welcomes user
+        String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+        String allBooks = mFirebaseRefBooks.child(userUid).toString();
+//      allBooks provides link to logged in users books
+
         mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -118,4 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
 }
