@@ -106,7 +106,8 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 mStartReadingButton.setVisibility(View.GONE);
                 mFinishReadingButton.setVisibility(View.VISIBLE);
             } else {
-                mStartDateTextView.setText("Starting reading!");
+                mStartDateTextView.setText("Start reading!");
+                mEditBookButton.setVisibility(View.INVISIBLE);
             }
 
             mStartReadingButton.setOnClickListener(this);
@@ -166,6 +167,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             case R.id.startReadingButton:
                 mStartReadingButton.setVisibility(View.INVISIBLE);
                 mFinishReadingButton.setVisibility(View.VISIBLE);
+                mEditBookButton.setVisibility(View.VISIBLE);
                 Date newStartDate = new Date();
                 mBook.setStartDate(newStartDate);
                 mStartDateTextView.setText("Start Date: " + mBook.getStartDate());
