@@ -12,7 +12,7 @@
         android:text="Welcome user"
         android:id="@+id/welcomeTextView"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
