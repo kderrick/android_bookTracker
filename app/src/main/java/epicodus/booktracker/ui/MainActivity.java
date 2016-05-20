@@ -6,8 +6,6 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
     @Bind(R.id.totalLibraryTextView) TextView mTotalLibraryTextView;
     @Bind(R.id.finishedBookTextView) TextView mFinishedBookTextView;
+    @Bind(R.id.averagePagesTextView) TextView mAveragePagesTextView;
 
     private ValueEventListener mUserRefListener;
     private ValueEventListener mUserBookRefListener;
@@ -48,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences mSharedPreferences;
     private Firebase mFirebaseRef;
     private Firebase mFirebaseRefBooks;
-//    private ArrayList<Book> bookArray = new ArrayList<>();
-//    private ArrayList<Book> finishedBookArray = new ArrayList<>();
+    private int allBooksPageTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Spannable spannable = (Spannable)mAppNameTextView.getText();
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources()
-                .getColor(R.color.colorOrange));
-        spannable.setSpan( colorSpan, 4, 11, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
-
         //grabs username to show on welcome screen
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
         mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
 
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-
-
-
 
         mFindBooksButton.setOnClickListener(this);
         mSavedBooksButton.setOnClickListener(this);
@@ -90,9 +80,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if( book.getCurrentPage() >= book.getPageCount()) {
                         finishedBookArray.add(book);
                     }
+                    allBooksPageTotal += book.getAvgPagesPerDay();
+                    System.out.println(allBooksPageTotal);
                 }
                 mTotalLibraryTextView.setText(bookArray.size()+"");
                 mFinishedBookTextView.setText(finishedBookArray.size()+"");
+                mAveragePagesTextView.setText("" + allBooksPageTotal/bookArray.size());
 //
             }
 
@@ -118,8 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-//        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/androidnation.ttf");
-//        mAppNameTextView.setTypeface(tf);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/MajorBlack.ttf");
+        mAppNameTextView.setTypeface(tf);
+
     }
 
     @Override
@@ -166,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
 
 
 }
