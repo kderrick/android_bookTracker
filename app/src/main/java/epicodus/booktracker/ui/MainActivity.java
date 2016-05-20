@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences mSharedPreferences;
     private Firebase mFirebaseRef;
     private Firebase mFirebaseRefBooks;
-//    private ArrayList<Book> bookArray = new ArrayList<>();
-//    private ArrayList<Book> finishedBookArray = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/MajorBlack.ttf");
         mAppNameTextView.setTypeface(tf);
+
     }
 
     @Override
@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
 
 
 }
