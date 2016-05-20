@@ -7,14 +7,18 @@
     android:background="@color/white">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Welcome user"
         android:id="@+id/welcomeTextView"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textSize="40sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ccc"
+        android:textStyle="bold"
+        android:padding="8dp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -26,7 +30,10 @@
         android:textStyle="bold"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="20sp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -38,18 +45,22 @@
         android:textColor="@drawable/button_tertiary_color"
         android:textStyle="bold"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name of App!"
+        android:text="B O O K T R A C K E R"
         android:id="@+id/appNameTextView"
         android:layout_below="@+id/welcomeTextView"
         android:layout_centerHorizontal="true"
-        android:textSize="50dp"
+        android:textSize="40dp"
         android:textColor="@color/colorPrimary"
-        android:layout_marginTop="47dp" />
+        android:layout_marginTop="47dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,18 +68,38 @@
         android:text="New Text"
         android:id="@+id/totalLibraryTextView"
         android:textSize="30sp"
-        android:layout_below="@+id/appNameTextView"
-        android:layout_alignLeft="@+id/welcomeTextView"
-        android:layout_alignStart="@+id/welcomeTextView"
-        android:layout_marginTop="46dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/finishedBookTextView"
+        android:layout_alignStart="@+id/finishedBookTextView"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/finishedBookTextView"
-        android:layout_centerVertical="true"
+        android:textSize="30sp"
+        android:layout_below="@+id/totalLibraryTextView"
         android:layout_centerHorizontal="true"
-        android:textSize="30sp" />
+        android:layout_marginTop="42dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Books In Library"
+        android:id="@+id/textView"
+        android:textSize="30sp"
+        android:layout_above="@+id/totalLibraryTextView"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Books Read"
+        android:id="@+id/textView2"
+        android:textSize="30sp"
+        android:layout_below="@+id/totalLibraryTextView"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"/>
 
 </RelativeLayout>

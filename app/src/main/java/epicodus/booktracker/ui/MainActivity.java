@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         finishedBookArray.add(book);
                     }
                 }
-                mTotalLibraryTextView.setText("Total number of books in library: "+ bookArray.size());
-                mFinishedBookTextView.setText("Total number of finished books: "+ finishedBookArray.size());
+                mTotalLibraryTextView.setText(bookArray.size()+"");
+                mFinishedBookTextView.setText(finishedBookArray.size()+"");
 //
             }
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if (user.getName() != null) {
-                    mWelcomeTextView.setText("Welcome, " + user.getName() + ", to");
+                    mWelcomeTextView.setText(user.getName());
                 }
             }
 
