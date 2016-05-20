@@ -58,7 +58,7 @@
         android:id="@+id/appNameTextView"
         android:layout_below="@+id/welcomeTextView"
         android:layout_centerHorizontal="true"
-        android:textSize="40dp"
+        android:textSize="50dp"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginTop="47dp"
         android:textStyle="bold"/>
