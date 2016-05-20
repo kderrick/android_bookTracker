@@ -53,12 +53,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="B O O K T R A C K E R"
+        android:text="BOOKTRACKER"
+        android:bufferType="spannable"
         android:id="@+id/appNameTextView"
         android:layout_below="@+id/welcomeTextView"
         android:layout_centerHorizontal="true"
         android:textSize="40dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginTop="47dp"
         android:textStyle="bold"/>
 
@@ -69,6 +70,7 @@
         android:id="@+id/totalLibraryTextView"
         android:textSize="30sp"
         android:layout_centerVertical="true"
+        android:textColor="@color/colorOrange"
         android:layout_alignLeft="@+id/finishedBookTextView"
         android:layout_alignStart="@+id/finishedBookTextView"/>
 
@@ -79,6 +81,7 @@
         android:id="@+id/finishedBookTextView"
         android:textSize="30sp"
         android:layout_below="@+id/totalLibraryTextView"
+        android:textColor="@color/colorOrange"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"/>
 
@@ -89,6 +92,7 @@
         android:id="@+id/textView"
         android:textSize="30sp"
         android:layout_above="@+id/totalLibraryTextView"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"/>
 
@@ -99,6 +103,7 @@
         android:id="@+id/textView2"
         android:textSize="30sp"
         android:layout_below="@+id/totalLibraryTextView"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"/>
 

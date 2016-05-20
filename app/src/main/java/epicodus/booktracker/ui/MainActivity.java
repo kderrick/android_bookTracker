@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -54,6 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Spannable spannable = (Spannable)mAppNameTextView.getText();
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(getResources()
+                .getColor(R.color.colorOrange));
+        spannable.setSpan( colorSpan, 4, 11, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
 
         //grabs username to show on welcome screen
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -111,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/MajorBlack.ttf");
-        mAppNameTextView.setTypeface(tf);
+//        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/androidnation.ttf");
+//        mAppNameTextView.setTypeface(tf);
     }
 
     @Override
