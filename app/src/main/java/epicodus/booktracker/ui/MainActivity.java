@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
     @Bind(R.id.totalLibraryTextView) TextView mTotalLibraryTextView;
     @Bind(R.id.finishedBookTextView) TextView mFinishedBookTextView;
+    @Bind(R.id.averagePagesTextView) TextView mAveragePagesTextView;
 
     private ValueEventListener mUserRefListener;
     private ValueEventListener mUserBookRefListener;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences mSharedPreferences;
     private Firebase mFirebaseRef;
     private Firebase mFirebaseRefBooks;
-
+    private int allBooksPageTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
 
         mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-
-
-
 
         mFindBooksButton.setOnClickListener(this);
         mSavedBooksButton.setOnClickListener(this);
@@ -82,9 +80,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if( book.getCurrentPage() >= book.getPageCount()) {
                         finishedBookArray.add(book);
                     }
+                    allBooksPageTotal += book.getAvgPagesPerDay();
+                    System.out.println(allBooksPageTotal);
                 }
                 mTotalLibraryTextView.setText(bookArray.size()+"");
                 mFinishedBookTextView.setText(finishedBookArray.size()+"");
+                mAveragePagesTextView.setText("" + allBooksPageTotal/bookArray.size());
 //
             }
 
