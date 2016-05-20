@@ -49,13 +49,13 @@ public class GoogleBookService {
                 JSONArray resultsJSON = bookJSON.getJSONArray("items");
                 for (int i = 0; i < resultsJSON.length(); i++) {
                     JSONObject basicInfoJSON = resultsJSON.getJSONObject(i);
-                    Log.v("i", i+"");
                     JSONObject volumeInfoJSON = basicInfoJSON.getJSONObject("volumeInfo");
                     JSONObject imagesInfoJSON = volumeInfoJSON.optJSONObject("imageLinks");
                     JSONArray authorsInfoJSON = volumeInfoJSON.optJSONArray("authors");
+                    JSONArray categoriesJSON = volumeInfoJSON.optJSONArray("categories");
 
                     String title = volumeInfoJSON.optString("title");
-                    String author = "";
+                    String author = "N/A";
                     if (authorsInfoJSON != null) {
                         author = authorsInfoJSON.getString(0);
                     }
@@ -63,10 +63,15 @@ public class GoogleBookService {
                     String image = "";
                     if (imagesInfoJSON != null) {
                         image = imagesInfoJSON.getString("thumbnail");
-                        Log.v("image", image);
                     }
 
-                    String description = "";
+                    String category = "N/A";
+                    if (categoriesJSON != null) {
+                        category = categoriesJSON.getString(0);
+                        Log.v("TAG", category);
+                    }
+
+                    String description = "No description available.";
                     if (volumeInfoJSON != null ) {
                         description = volumeInfoJSON.optString("description");
                     }
@@ -75,7 +80,7 @@ public class GoogleBookService {
                     int pageCount = volumeInfoJSON.optInt("pageCount");
                     String publishedDate = volumeInfoJSON.optString("publishedDate");
 
-                    Book book = new Book(title, author, image, description, aveRating, previewLink, pageCount, publishedDate);
+                    Book book = new Book(title, author, image, description, aveRating, previewLink, pageCount, publishedDate, category);
                     books.add(book);
                 }
             }

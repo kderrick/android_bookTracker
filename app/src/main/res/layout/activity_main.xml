@@ -30,7 +30,10 @@
         android:textStyle="bold"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="20sp"/>
 
     <Button
         android:layout_width="match_parent"
@@ -42,18 +45,22 @@
         android:textColor="@drawable/button_tertiary_color"
         android:textStyle="bold"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BookTracker"
+        android:text="B O O K T R A C K E R"
         android:id="@+id/appNameTextView"
         android:layout_below="@+id/welcomeTextView"
         android:layout_centerHorizontal="true"
-        android:textSize="50dp"
+        android:textSize="40dp"
         android:textColor="@color/colorPrimary"
-        android:layout_marginTop="47dp" />
+        android:layout_marginTop="47dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
