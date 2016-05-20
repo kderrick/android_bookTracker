@@ -48,14 +48,13 @@ public class GoogleBookService {
                 JSONObject bookJSON = new JSONObject(jsonData);
                 JSONArray resultsJSON = bookJSON.getJSONArray("items");
                 for (int i = 0; i < resultsJSON.length(); i++) {
-
                     JSONObject basicInfoJSON = resultsJSON.getJSONObject(i);
+                    Log.v("i", i+"");
                     JSONObject volumeInfoJSON = basicInfoJSON.getJSONObject("volumeInfo");
                     JSONObject imagesInfoJSON = volumeInfoJSON.optJSONObject("imageLinks");
                     JSONArray authorsInfoJSON = volumeInfoJSON.optJSONArray("authors");
 
                     String title = volumeInfoJSON.optString("title");
-
                     String author = "";
                     if (authorsInfoJSON != null) {
                         author = authorsInfoJSON.getString(0);
@@ -64,28 +63,20 @@ public class GoogleBookService {
                     String image = "";
                     if (imagesInfoJSON != null) {
                         image = imagesInfoJSON.getString("thumbnail");
+                        Log.v("image", image);
                     }
 
                     String description = "";
                     if (volumeInfoJSON != null ) {
                         description = volumeInfoJSON.optString("description");
                     }
-
                     double aveRating = basicInfoJSON.optDouble("averageRating");
-
                     String previewLink = volumeInfoJSON.optString("previewLink");
-
-//                    String retailPrice = "";
-//                    if (basicInfoJSON.getJSONObject("saleInfo") != null) {
-//                        retailPrice = basicInfoJSON.getJSONObject("saleInfo").getJSONObject("retailPrice").getString("amount");
-//                    }
-
                     int pageCount = volumeInfoJSON.optInt("pageCount");
                     String publishedDate = volumeInfoJSON.optString("publishedDate");
 
                     Book book = new Book(title, author, image, description, aveRating, previewLink, pageCount, publishedDate);
                     books.add(book);
-                    Log.v("BOOKS", books.toString());
                 }
             }
         } catch (JSONException | IOException e) {

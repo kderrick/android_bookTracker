@@ -54,7 +54,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
     @Bind(R.id.pageCountTextView) TextView mPageCountLabel;
     @Bind(R.id.saveBookButton) Button mSaveBookButton;
     @Bind(R.id.editBookButton) Button mEditBookButton;
-    @Bind(R.id.readingProgressRelativeLayout) RelativeLayout mReadingProgressRelativeLayout;
+   // @Bind(R.id.readingProgressRelativeLayout) RelativeLayout mReadingProgressRelativeLayout;
 
     public static final String TAG = BookDetailFragment.class.getSimpleName();
 
@@ -108,11 +108,11 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
         mPreviewButton.setOnClickListener(this);
 
         if (mSource.equals(Constants.SOURCE_SAVED)) {
-            mSaveBookButton.setVisibility(View.GONE);
-            mPageCountLabel.setVisibility(View.GONE);
-            mPublishedDateTextView.setVisibility(View.GONE);
-            mCategoryTextView.setVisibility(View.GONE);
-            mDescriptionLabel.setVisibility(View.GONE);
+            mSaveBookButton.setVisibility(View.INVISIBLE);
+            mPageCountLabel.setVisibility(View.INVISIBLE);
+            mPublishedDateTextView.setVisibility(View.INVISIBLE);
+            mCategoryTextView.setVisibility(View.INVISIBLE);
+            mDescriptionLabel.setVisibility(View.INVISIBLE);
             mFinishReadingButton.setVisibility(View.INVISIBLE);
             mStartDateLabelTextView.setVisibility(View.INVISIBLE);
             mEndDateLabelTextView.setVisibility(View.INVISIBLE);
@@ -122,7 +122,7 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
                 Date currentStateDate = mBook.getStartDate();
                 String startDateString = new SimpleDateFormat("MM/dd/yyyy").format(currentStateDate);
                 mStartDateTextView.setText("" + startDateString);
-                mStartReadingButton.setVisibility(View.GONE);
+                mStartReadingButton.setVisibility(View.INVISIBLE);
                 mStartDateLabelTextView.setVisibility(View.VISIBLE);
                 mFinishReadingButton.setVisibility(View.VISIBLE);
                 if (mBook.getEndDate() != null) {
@@ -142,33 +142,33 @@ public class BookDetailFragment extends Fragment implements View.OnClickListener
             mStartReadingButton.setOnClickListener(this);
             mFinishReadingButton.setOnClickListener(this);
             mEditBookButton.setOnClickListener(this);
-            mPreviewButton.setVisibility(View.GONE);
+            mPreviewButton.setVisibility(View.INVISIBLE);
             mAvgPageTextView.setText(getAvgPagesPerDay());
             mCurrentPageTextView.setText(mBook.getCurrentPage() + "/" + mBook.getPageCount());
 
         } else {
-            mReadingProgressRelativeLayout.setVisibility(View.GONE);
-            mEditBookButton.setVisibility(View.GONE);
-            mCurrentPageTextView.setVisibility(View.GONE);
-            mAvgPageTextView.setVisibility(View.GONE);
-            mStartDateTextView.setVisibility(View.GONE);
-            mEndDateTextView.setVisibility(View.GONE);
-            mStartReadingButton.setVisibility(View.GONE);
-            mFinishReadingButton.setVisibility(View.GONE);
-            mAvgPagesLabelTextView.setVisibility(View.GONE);
-            mStartDateLabelTextView.setVisibility(View.GONE);
-            mEndDateTextView.setVisibility(View.GONE);
-            mTotalPagesReadTextView.setVisibility(View.GONE);
+            //mReadingProgressRelativeLayout.setVisibility(View.GONE);
+            mEditBookButton.setVisibility(View.INVISIBLE);
+            mCurrentPageTextView.setVisibility(View.INVISIBLE);
+            mAvgPageTextView.setVisibility(View.INVISIBLE);
+            mStartDateTextView.setVisibility(View.INVISIBLE);
+            mEndDateTextView.setVisibility(View.INVISIBLE);
+            mStartReadingButton.setVisibility(View.INVISIBLE);
+            mFinishReadingButton.setVisibility(View.INVISIBLE);
+            mAvgPagesLabelTextView.setVisibility(View.INVISIBLE);
+            mStartDateLabelTextView.setVisibility(View.INVISIBLE);
+            mEndDateLabelTextView.setVisibility(View.INVISIBLE);
+            mTotalPagesReadTextView.setVisibility(View.INVISIBLE);
             mSaveBookButton.setOnClickListener(this);
         }
 
         final String imageUrl = mBook.getImage();
 
         if (TextUtils.isEmpty(imageUrl)) {
-            Picasso.with(view.getContext()).load(R.drawable.noimage).resize(400, 600).into(mImageLabel);
+            Picasso.with(view.getContext()).load(R.drawable.noimage).resize(600, 800).into(mImageLabel);
 //                           mImageLabel.setImageResource(R.drawable.noimage);
         } else {
-            Picasso.with(view.getContext()).load(mBook.getImage()).resize(400, 600).into(mImageLabel);
+            Picasso.with(view.getContext()).load(mBook.getImage()).resize(600, 800).into(mImageLabel);
         }
 
         mAuthorLabel.setText(mBook.getAuthor());
