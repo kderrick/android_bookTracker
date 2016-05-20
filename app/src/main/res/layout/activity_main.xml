@@ -4,41 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/colorPrimaryDark">
+
+
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome user"
         android:id="@+id/welcomeTextView"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
         android:textSize="20dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search Books"
         android:id="@+id/findBookButton"
-        android:background="@drawable/button_orange"
-        android:textColor="@drawable/button_orange_color"
+        android:background="@drawable/button_orange_reverse"
+        android:textColor="@drawable/button_orange_reverse_color"
         android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignTop="@+id/savedBooksButton"
+        android:layout_alignLeft="@+id/appNameTextView"
+        android:layout_alignStart="@+id/appNameTextView" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Saved Books"
         android:id="@+id/savedBooksButton"
-        android:layout_above="@+id/findBookButton"
-        android:background="@drawable/button_tertiary"
-        android:textColor="@drawable/button_tertiary_color"
+        android:background="@drawable/login_button"
+        android:textColor="@drawable/login_button_color"
         android:textStyle="bold"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/appNameTextView"
+        android:layout_alignEnd="@+id/appNameTextView"
+        android:layout_marginBottom="53dp" />
 
     <TextView
         android:layout_width="wrap_content"

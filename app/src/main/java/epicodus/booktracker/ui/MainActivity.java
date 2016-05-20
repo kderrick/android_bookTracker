@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if (user.getName() != null) {
-                    mWelcomeTextView.setText("Welcome, " + user.getName() + ", to");
+                    mWelcomeTextView.setText("Welcome, " + user.getName() + "!");
                 }
             }
 
